@@ -311,6 +311,11 @@ git push -u origin master        --> subir os arquivos para o gitHub
 
 - Utilizando o site bitbucket.org 
 
+cd /var/www/sistema_laravel
+git remote add origin https://moinunes@bitbucket.org/moinunes/sistema_laravel.git
+git push -u origin --all  # pushes up the repo and its refs for the first time
+git push origin --tags    # pushes up any tags
+
 
 --------------------------- zend framework 2: ou zf2: ------------------------------------------------
 

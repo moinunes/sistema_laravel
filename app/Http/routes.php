@@ -54,12 +54,12 @@ Route::group(['middleware' => 'web'], function () {
    Route::get('grupo/{acao}/{id?}', 'GrupoController@exibir_form' )->name('grupo.exibir_form'); 
    Route::post('grupo/confirmar',   'GrupoController@confirmar'   )->name('grupo.confirmar'  );
 
-   //.. permissao
+   //.. permissao de grupo
    Route::any('permissao',              'PermissaoController@exibir_grid' )->name('permissao.exibir_grid');
    Route::get('permissao/cancelar',     'PermissaoController@cancelar'    )->name('permissao.cancelar'); 
-   Route::get('permissao/imprimir',     'PermissaoController@imprimir'    )->name('permissao.imprimir'); 
+   Route::get('permissao/negada',       'PermissaoController@negada'      )->name('permissao.negada'); 
    Route::get('permissao/{acao}/{id?}', 'PermissaoController@exibir_form' )->name('permissao.exibir_form'); 
-   Route::post('permissao/confirmar',   'PermissaoController@confirmar'   )->name('permissao.confirmar'  );
+   Route::post('permissao/confirmar',   'PermissaoController@confirmar'   )->name('permissao.confirmar'  );   
 
    // uf
    Route::any('uf',              'UfController@exibir_grid' )->name('uf.exibir_grid');

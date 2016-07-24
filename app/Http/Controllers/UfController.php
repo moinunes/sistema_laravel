@@ -26,6 +26,7 @@ class UfController extends MeuController {
    * @return void
    */
    public function __construct( UfRepository $uf_repository ) {
+      parent::__construct();
       $this->UfRepository = $uf_repository;
    } // __construct
 
@@ -48,7 +49,6 @@ class UfController extends MeuController {
    public function exibir_form( $acao, $id = null ) {
       Infra_Filtro::manter_filtros( 'S' );
       $this->UfRepository->acao = $acao;
-      dd('xx');
       $this->UfRepository->igualar_formulario( $data, $id );
       return view( 'uf.uf_form' )->with( 'data',     $data  )
                                  ->with( 'acao',     $acao  );

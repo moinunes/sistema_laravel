@@ -46,25 +46,8 @@ class MeuController extends Controller {
    public function __construct() {      
       // se o usuário não tiver logado, redireciona para o login
       $this->middleware( 'auth' );
-     
-
    } // __construct
    
-   /**
-   * Valida os dados antes de persitir
-   *    - se falhar, guarda o resultado em $this->validator
-   * @return boolean
-   */
-   public function Validarxxxxxxxxxxx() {
-      $resultado = true;     
-      if( $this->acao == 'incluir' || $this->acao == 'alterar' ) {
-         $this->definir_regras();
-         $this->validator = Validator::make( $this->data, $this->regras );
-         if ( $this->validator->fails() ) {
-            $resultado = false;
-         }
-      }      
-      return $resultado;
-   } // Validar
+   
       
 } // MeuController

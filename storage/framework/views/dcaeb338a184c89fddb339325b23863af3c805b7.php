@@ -110,12 +110,21 @@ $titulo   = 'Permissões';
    }
 
    function criar_inputs() {
-      itens = $('#jstree').jstree(true).get_selected();  
+      var _obj = $('#jstree').jstree(true).get_selected('full',true);
+      selecionados_pais   = [];
+      selecionados_filhos = [];
+      $.each( _obj, function( key, item ) {
+        selecionados_pais.push(item.parents);
+        selecionados_filhos.push(item.id);
+      });
+      selecionados = selecionados_pais.join(",");
+      selecionados = selecionados + selecionados_filhos.join(",");
+
       var input   =  document.createElement("input");
       input.type  = "text";
-      input.id    = 'txt_campos';
-      input.name  = 'txt_campos';
-      input.value = itens;   
+      input.id    = 'txt_selecionados';
+      input.name  = 'txt_selecionados';
+      input.value = selecionados;
       frm_permissao.appendChild(input);        
    }
 

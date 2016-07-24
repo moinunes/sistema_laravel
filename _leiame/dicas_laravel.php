@@ -43,19 +43,15 @@ Produto.joins(:fornecedor).where(id_produto: $id_produto ).first
 
 $x = Produto::where( ['id_produto' => $id_produto] ) ;
 $x=Produto::find( $id_produto);
-dd( $x );
 
 $x = Produto::find( $id_produto ) ;
-dd( $x );
 
 $x = Produto::findOrNew( 1 ) ;
-dd( $x );
 
 
 /*----------------- Obtém o ultimo registro  --------------------------*/
 $x = Produto::latest()->first();              // ultimo registro
 $x = Produto::latest()->first()->id_produto;  // ultimo id
-dd( $x );
 
 
     

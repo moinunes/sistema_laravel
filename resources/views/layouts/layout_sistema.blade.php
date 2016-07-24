@@ -1,5 +1,6 @@
 <?php
 use App\Core\Infra\Infra_Menu;
+
 ?>
 
 <!DOCTYPE html>

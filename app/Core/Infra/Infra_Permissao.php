@@ -5,7 +5,8 @@ use DB;
 use Auth;
 use Input;
 use Request;
-use app\User;
+use App\User;
+
 
 /*
 * Classe Infra_Permissao
@@ -18,7 +19,6 @@ use app\User;
 
 class Infra_Permissao {
 
-     
    static function obter_permissao( &$resultado, $id_grupo, $id_menu ) {
       $resultado = false;
       $query = DB::select( " SELECT id_grupo,id_menu
@@ -77,21 +77,16 @@ class Infra_Permissao {
    * @return   boolean    
    */   
    public static function tem_permissao( $acao = null ) {
-return true;
-
-
+//dd();
 
       $resultado = false;      
       $rota      = Request::segment(1);
-      
-      // se o usuário é "master" - o acesso é liberado
-      $user = User::find( Auth::user()->id );
-      if ( $user->master ) {
+      if ( $rota == null ||  $rota == 'login' ||  $rota == 'logout' ) {          
          return true;
       }
-
+     
       // inserir aqui as "rotas" com acesso liberado.
-      if ( $rota == '' || $rota == 'home' ) {
+      if ( $rota == '' || $rota == 'home'  ) {
          return true;
       }
 
@@ -99,11 +94,10 @@ return true;
       if ( $rota == 'tools' && !$user->master ) {
          return false;
       }      
-
       // obtém o id do menu para verificar a permissão
       Infra_Permissao::obter_id_menu( $id_menu, $rota, $acao );
       if ( $id_menu == '' ) {         
-         dd( 'id_menu não encontrado - problemas na tabela: tbmenu' );
+         dd( 'id_menu não encontrado - problemas na tabela: tbmenus' );
       }
       
       // verifica permissão      
@@ -128,13 +122,13 @@ return true;
    protected static function obter_id_menu( &$id_menu, $rota, $acao = null ) {
       $id_menu = '';
       if ( $acao == null ) {
-         $registro = DB::select( " SELECT id FROM tbmenu WHERE rota = :rota", [ 'rota' => $rota ] );
+         $registro = DB::select( " SELECT id_menu FROM tbmenu WHERE rota = :rota", [ 'rota' => $rota ] );
       } else {
-         $registro = DB::select( " SELECT id FROM tbmenu WHERE rota = :rota AND acao = :acao", [ 'rota' => $rota, 'acao' => $acao ] );
+         $registro = DB::select( " SELECT id_menu FROM tbmenu WHERE rota = :rota AND acao = :acao", [ 'rota' => $rota, 'acao' => $acao ] );
       }      
       if ( $registro ) {
          $registro = (object)$registro[0];
-         $id_menu = $registro->id;       
+         $id_menu = $registro->id_menu;       
       }
    } // obter_id_menu
 
@@ -143,12 +137,14 @@ return true;
    *
    * @return   array        grupos  
    */   
-   protected static function obter_grupos_do_usuario( &$resultado ) {
-      $id_user = Auth::user()->id;
+   protected static function obter_grupos_do_usuario( &$resultado ) {     
+      $user = Auth::user();
+      
+      //$id_user = Auth::user->id;
       $resultado = false;
       $resultado = DB::select( " SELECT id_grupo,id_user
-                                 FROM tbgrupo_users                                    
-                                 WHERE id_user = :id_user", [ 'id_user' => $id_user ] );   
+                                 FROM tbgrupo_user                                    
+                                 WHERE id_user = :id_user", [ 'id_user' => $user->id ] );   
       return $resultado;
    } // obter_grupos_do_usuario
 
@@ -162,7 +158,7 @@ return true;
    protected static function permite_acesso( $id_grupo, $id_menu ) {      
       $resultado = false;
       $query = DB::select( " SELECT id_grupo,id_menu
-                                 FROM tbpermissoes
+                                 FROM tbpermissao
                                  WHERE id_grupo = :id_grupo AND id_menu = :id_menu", [ 'id_grupo' => $id_grupo, 'id_menu' => $id_menu ] );      
       if ( $query ) {
          $resultado = true;

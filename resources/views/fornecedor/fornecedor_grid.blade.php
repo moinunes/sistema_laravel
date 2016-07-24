@@ -48,11 +48,9 @@ $titulo = 'Cadastro - Fornecedor';
                      <tr class="cor_azul2">
                         <th width='20%'  >
                         <?php
-                        //Infra_Html::criar_link_com_permissao( 'incluir'  );
-                        //Infra_Html::criar_link_com_permissao( 'imprimir' );
-                        ?>
-                        <a href='/fornecedor/incluir' ><span class='btn btn-success glyphicon glyphicon-plus'></span></a>
-                        <a href='/fornecedor/imprimir'><span class='btn glyphicon glyphicon-print'></span></a>
+                        Infra_Html::criar_link_com_permissao( 'incluir'  );
+                        Infra_Html::criar_link_com_permissao( 'imprimir' );
+                        ?>                        
                         </th>                      
                         <th width='20%'><a href="/fornecedor/?ordem=codigo_fornecedor">Código</a></th>
                         <th width='60%'><a href="/fornecedor/?ordem=nome_fornecedor">Nome</a></th>                         

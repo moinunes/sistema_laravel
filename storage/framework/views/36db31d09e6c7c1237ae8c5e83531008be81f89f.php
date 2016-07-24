@@ -50,8 +50,6 @@ $titulo = 'Cadastro - Permissões';
            <thead>
                <tr class="cor_azul2">
                    <th width='10%' align='center'>
-                     <!-- exibe os links [imprimir] -->                  
-                     <a href='/permissao/imprimir'><span class='btn glyphicon glyphicon-print'></span></a>
                    </th>                
                    <th width='20%'><a href="/permissao/?order=grupo">Grupo</a></th>
                    <th width='70%'><a href="/permissao/?order=descricao">Descrição</a></th>

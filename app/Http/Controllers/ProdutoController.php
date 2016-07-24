@@ -29,6 +29,7 @@ class ProdutoController extends MeuController {
    * @return void
    */
    public function __construct( ProdutoRepository $produto_repository ) {
+      parent::__construct();
       $this->ProdutoRepository = $produto_repository;
    } // __construct
 

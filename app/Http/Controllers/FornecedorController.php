@@ -27,6 +27,7 @@ class FornecedorController extends MeuController {
    * @return void
    */
    public function __construct( FornecedorRepository $fornecedor_repository ) {
+      parent::__construct();
       $this->FornecedorRepository = $fornecedor_repository;
    } // __construct
 

@@ -9,7 +9,7 @@ use App\Core\Infra\Infra_Filtro;
 
 use Illuminate\Http\Request;
 use Input;
-
+use Auth;
 
 
 class PermissaoController extends MeuController {
@@ -50,10 +50,11 @@ class PermissaoController extends MeuController {
    /**
    * Confirma a Inclusao, alteração e exclusão
    */
-   public function confirmar() { 
-      switch ( Input::get('acao') ) {         
+   public function confirmar() {      
+      switch ( Input::get('acao') ) {
          case 'alterar':             
-            $this->PermissaoRepository->Alterar( Input::all() );
+            $this->PermissaoRepository->_request = (object)Input::all();
+            $this->PermissaoRepository->Alterar();
             break;         
               
          default:
@@ -65,16 +66,18 @@ class PermissaoController extends MeuController {
    /**
    *  Permissao negada
    */
-   protected function show() {      
-    return redirect( 'permissao' );
+   public function negada() {     
+      $rota = input::get('rota');
+      $data = new \stdClass();     
+      $data->usuario = Auth::user()->name;
+      $data->rota    = $rota;
+
+      return view( 'permissao.permissao_negada' )->with('data',$data );
    }
 
 
-   /**
-   *  Imprime os registros da grid
-   */   
-   public function imprimir() {
-      $this->PermissaoRepository->imprimir();
-   }  
+   public function cancelar() {      
+      return redirect( 'permissao' );
+   } // cancelar
 
 }

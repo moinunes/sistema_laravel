@@ -18,12 +18,12 @@ class Infra_Html {
    * @param    int        id
    * @return   void   
    */
-   public static function criar_link_com_permissao( $acao = 'incluir', $id = 0 ) {
+   public static function criar_link_com_permissao( $acao = 'incluir', $id = '' ) {
       self::obter_classe( $classe, $acao );
       $url = Request::url();
       $url = "$url/$acao/$id";
       if ( Infra_Permissao::tem_permissao( $acao ) ) {
-         echo "<a href='$url'><span class='$classe'></span></a>&nbsp;&nbsp;";        
+         echo "<a href='$url'><span class='$classe'></span></a>&nbsp;&nbsp;";
       }
    } // criar_link
 

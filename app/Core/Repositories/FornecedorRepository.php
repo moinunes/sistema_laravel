@@ -49,7 +49,6 @@ class FornecedorRepository extends Fornecedor {
       $this->_obter_regras( $regras );
       $this->validacao = Validator::make( $request , $regras );
       if ( $this->validacao->passes() ) {
-         //dd($request);
          $fornecedor = Fornecedor::findOrFail( $request['id_fornecedor'] );
          $fornecedor->codigo_fornecedor = $request['codigo_fornecedor'];
          $fornecedor->nome_fornecedor   = $request['nome_fornecedor'];       
