@@ -17,20 +17,13 @@ class PermissaoMiddleware {
     * @param  \Closure  $next
     * @return mixed
     */
-   public function handle( $request, Closure $next, $guard = null )  { 
-
+   public function handle( $request, Closure $next, $guard = null )  {
       if ( Auth::guard($guard)->check() ) {
          if ( !Infra_Permissao::tem_permissao() ) {
-            
-            //$data = array();
-            $rota = Request::segment(1); 
-            //dd($rota);
-            //return redirect( 'permissao/negada' );
+            $rota = Request::segment(1);             
             return redirect()->action('PermissaoController@negada', ['rota' => $rota]  );
-            //return redirect('permissao/negada')->with( 'teste', 'Login Failed');
          } 
       }
-
       return $next($request);
    }
 

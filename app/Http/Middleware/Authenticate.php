@@ -22,8 +22,7 @@ class Authenticate {
          if ($request->ajax() || $request->wantsJson()) {
             return response('Unauthorized.', 401 );
          } else {
-            // redireciona para a tela de login 
-                      
+            // redireciona para a tela de login                      
             return redirect()->guest('login');
          }
       }
