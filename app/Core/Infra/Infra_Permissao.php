@@ -77,34 +77,33 @@ class Infra_Permissao {
    * @return   boolean    
    */   
    public static function tem_permissao( $acao = null ) {
-//dd();
-
       $resultado = false;      
       $rota      = Request::segment(1);
-      if ( $rota == null ||  $rota == 'login' ||  $rota == 'logout' ) {          
-         return true;
-      }
-     
-      // inserir aqui as "rotas" com acesso liberado.
-      if ( $rota == '' || $rota == 'home'  ) {
+          
+      // insira aqui as ROTAS com acesso liberado.
+      if ( $rota == '' || $rota == 'home' || $rota == 'busca'||  $rota == 'logout'  ) {
          return true;
       }
 
-      // rota: tools somente para usuário master
-      if ( $rota == 'tools' && !$user->master ) {
-         return false;
+      // rota 'tools' - somente para usuário master
+      if ( $rota == 'tools' ) {
+         $user = Auth::user();
+         if ( !$user->master ) {
+            return false;
+         }
       }      
-      // obtém o id do menu para verificar a permissão
+      
+      // obtém o id do menu
       Infra_Permissao::obter_id_menu( $id_menu, $rota, $acao );
       if ( $id_menu == '' ) {         
          dd( 'id_menu não encontrado - problemas na tabela: tbmenus' );
       }
       
-      // verifica permissão      
-      Infra_Permissao::obter_grupos_do_usuario( $grupos );      
+      // valida a permissão
+      Infra_Permissao::obter_grupos_do_usuario( $grupos );
       foreach ( $grupos as $indice => $item ) {
          if ( self::permite_acesso( $item->id_grupo, $id_menu ) ) {
-            $resultado = true;            
+            $resultado = true;
             break;
          }
       }   

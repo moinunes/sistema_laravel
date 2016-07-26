@@ -27,7 +27,6 @@ Route::get('/', function () {
 */
 
 
-
 Route::group(['middleware' => 'web'], function () {
 
    // autenticação
@@ -38,7 +37,8 @@ Route::group(['middleware' => 'web'], function () {
    Route::get( 'home', 'HomeController@index' );
 
    // busca
-   Route::any('busca/filtrar',     'BuscaController@filtrar' )->name('busca.filtrar');
+   Route::any('busca/filtrar',     'BuscaController@filtrar' )->name('busca.filtrar');  
+
       
    // user
    Route::any('user',              'UserController@exibir_grid' )->name('user.exibir_grid');
