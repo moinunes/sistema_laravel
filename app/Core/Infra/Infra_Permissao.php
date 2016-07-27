@@ -79,25 +79,26 @@ class Infra_Permissao {
    public static function tem_permissao( $acao = null ) {
       $resultado = false;      
       $rota      = Request::segment(1);
-          
+      
+
+      print 'rota:'.$rota;
+      print_r( input::all() );
+
       // insira aqui as ROTAS com acesso liberado.
-      if ( $rota == '' || $rota == 'home' || $rota == 'busca'||  $rota == 'logout'  ) {
+      if ( $rota == '' || $rota == 'home' || $rota == 'busca' ||  $rota == 'login' ||  $rota == 'logout' ) {
          return true;
       }
 
       // rota 'tools' - somente para usuário master
-      if ( $rota == 'tools' ) {
-         $user = Auth::user();
-         if ( !$user->master ) {
-            return false;
-         }
-      }      
-      
+      if ( $rota == 'tools' && Auth::user()->master=='S' ) {
+         return true;
+      }
+
       // obtém o id do menu
       Infra_Permissao::obter_id_menu( $id_menu, $rota, $acao );
       if ( $id_menu == '' ) {         
          dd( 'id_menu não encontrado - problemas na tabela: tbmenus' );
-      }
+      }      
       
       // valida a permissão
       Infra_Permissao::obter_grupos_do_usuario( $grupos );
@@ -106,8 +107,13 @@ class Infra_Permissao {
             $resultado = true;
             break;
          }
-      }   
-      
+      }
+
+       // usuario magda não tem permissao nenhuma
+        //nem a /permissao/negada?rota=permissao    - deveria deixar livre:  /permissao/negada
+       //dd('vixi');      
+
+
       return $resultado;
    } // tem_permissao
 

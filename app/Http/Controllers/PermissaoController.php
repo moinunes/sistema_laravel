@@ -66,7 +66,7 @@ class PermissaoController extends MeuController {
    /**
    *  Permissao negada
    */
-   public function negada() {     
+   public function negadaxxxxxxxxxxxxxxxxxxxxxx() {     
       $rota = input::get('rota');
       $data = new \stdClass();     
       $data->usuario = Auth::user()->name;

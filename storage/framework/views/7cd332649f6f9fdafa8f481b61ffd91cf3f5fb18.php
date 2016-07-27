@@ -67,7 +67,7 @@
                               <li><a href='/tools/carregar_menu'>disponível</a></li>
                            </ul>                  
                         </li>
-                        <li><a href="/auth/logout">Sair</a></li>
+                        <li><a href="/logout">Sair</a></li>
                      </ul>
                   </nav>
 
