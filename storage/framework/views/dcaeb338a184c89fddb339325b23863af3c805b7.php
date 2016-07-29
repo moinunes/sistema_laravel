@@ -51,14 +51,14 @@ $titulo   = 'Permissões';
                <?php foreach( $menus_superior as $superior ): ?>
                   <li id="txtPermissao_<?php echo e($superior->id_menu); ?>" ><?php echo e($superior->titulo); ?>
 
-                     <?php $permissao->obter_menus_itens( $menus_itens, $superior->id_menu, $data->id_grupo);?>
+                     <?php $permissao->obter_menus_filhos( $menus_itens, $superior->id_menu, $data->id_grupo);?>
                      <?php foreach( $menus_itens as $itens ): ?>
                          <ul>
                            <li id="txtPermissao_<?php echo e($itens->id_menu); ?>" ><?php echo e($itens->titulo); ?>
 
                               <ul>
                                  <?php
-                                 $permissao->obter_menus_itens( $sub_itens, $itens->id_menu, $data->id_grupo );
+                                 $permissao->obter_menus_filhos( $sub_itens, $itens->id_menu, $data->id_grupo );
                                  ?>
                                  <?php foreach( $sub_itens as $sub ): ?>
                                     <?php Infra_Permissao::obter_permissao( $resultado, $data->id_grupo, $sub->id_menu); ?>                      

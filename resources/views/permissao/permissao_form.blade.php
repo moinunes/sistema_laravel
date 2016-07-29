@@ -50,13 +50,13 @@ $titulo   = 'Permissões';
                ?>
                @foreach ( $menus_superior as $superior )
                   <li id="txtPermissao_{{$superior->id_menu}}" >{{$superior->titulo}}
-                     <?php $permissao->obter_menus_itens( $menus_itens, $superior->id_menu, $data->id_grupo);?>
+                     <?php $permissao->obter_menus_filhos( $menus_itens, $superior->id_menu, $data->id_grupo);?>
                      @foreach ( $menus_itens as $itens )
                          <ul>
                            <li id="txtPermissao_{{$itens->id_menu}}" >{{$itens->titulo}}
                               <ul>
                                  <?php
-                                 $permissao->obter_menus_itens( $sub_itens, $itens->id_menu, $data->id_grupo );
+                                 $permissao->obter_menus_filhos( $sub_itens, $itens->id_menu, $data->id_grupo );
                                  ?>
                                  @foreach ( $sub_itens as $sub )
                                     <?php Infra_Permissao::obter_permissao( $resultado, $data->id_grupo, $sub->id_menu); ?>                      
