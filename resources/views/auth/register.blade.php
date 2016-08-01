@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+<?php
+print_r($errors);
+?>
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -10,7 +14,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('name') ? ' has-error' : 'alert alert-info' }}">
                             <label class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">

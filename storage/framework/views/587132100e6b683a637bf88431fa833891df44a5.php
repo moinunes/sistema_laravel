@@ -1,14 +1,14 @@
 <?php
 
-/**************************************************************************
+/******************************************************************************************************
 *
 * View.....: produto_grid 
 * Descrição: Cadastro de produtos
 * Objetivo.: Montar Formulário de pesquisa e exibir registros na grid
 *
-***************************************************************************/
+******************************************************************************************************/
 
-use App\Core\Infra\Infra_Html; // provisório :  por o apelido no /var/www/laravel5/config/app.php:
+use App\Core\Infra\Infra_Html;
 
 $titulo = 'Cadastro - Produtos';
 
@@ -17,72 +17,66 @@ $titulo = 'Cadastro - Produtos';
 
 <?php $__env->startSection('content'); ?>
 
-<div class="row">  
-   <div class="col-md-10 col-md-offset-1">
-
-         <div class="div_titulo"><?php echo e($titulo); ?></div>
+<div class="div_titulo"><?php echo e($titulo); ?></div>
          
-         <!-- monta os filtros para pesquisa -->         
-         <div class="div_filtro">
-            <form action="<?php echo e(url('produto')); ?>" method="post" class="col-sm-12 form-horizontal" role="form">
-               <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-               <table class="table-responsive" width="50%" border="0">
-                  <tr>
-                     <td width="25%">Código</td>
-                     <td width="65%">Nome</td>
-                     <td width="10%"></td>
-                  </tr> 
-                  <tr>
-                    <td><input  type='text' name="filtro_codigo_produto" value="<?php echo e($filtros->filtro_codigo_produto); ?>" size="10" maxlength="10" ></td>
-                    <td><input  type='text' name="filtro_nome_produto"   value="<?php echo e($filtros->filtro_nome_produto); ?>"   size="30" maxlength="30" ></td>
-                    <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>
-                  </tr>
-               </table>
-            </form>
-         </div>
+<!-- monta os filtros para pesquisa -->
+<!--  -->
+<div class="div_filtro">
 
-         <div class="div_grid">      
-            <!-- exibe a grid da pesquisa -->
-            <table class="table table-condensed table-bordered table-hover">
-               <thead>
-                     <tr class="cor_azul2">
-                        <th width='20%'  >
-                        <?php
-                        //Infra_Html::criar_link_com_permissao( 'incluir'  );
-                        //Infra_Html::criar_link_com_permissao( 'imprimir' );
-                        ?>
-                        <a href='/produto/incluir'><span class='btn btn-success glyphicon glyphicon-plus'></span></a>
-                        <a href='/produto/imprimir'><span class='btn glyphicon glyphicon-print'></span></a>
-                        </th>                      
-                        <th width='20%'><a href="/produto/?ordem=codigo_produto">Código</a></th>
-                        <th width='60%'><a href="/produto/?ordem=nome_produto">Descrição</a></th>                         
-                     </tr>
-               </thead>
-
-               <tbody>
-                  <?php foreach( $data as $item ): ?>                   
-                     <tr>
-                        <td>
-                           <?php
-                           Infra_Html::criar_link_com_permissao( 'consultar', $item->id_produto );
-                           Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_produto );
-                           Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_produto );
-                           ?>
-                        </td>              
-                        <td><?php echo e($item->codigo_produto); ?></td>
-                        <td><?php echo e($item->nome_produto); ?></td>                
-                     </tr>
-                  <?php endforeach; ?>
-               </tbody>
-            </table>
-      </div>    
-
-      <div class="div_paginator">        
-         <?php echo $data->links(); ?>
-
-      </div>
+   <?= Infra_Html::Form( 'formulario' ); ?>
       
-   </div>    
+      <?= Infra_Html::input_hidden( '_token',  csrf_token() ); ?>
+
+      <table class="table-responsive" width="100%" border="0">        
+         <tr>
+            <td width="10%">Código</td>
+            <td width="30%">Nome</td>
+            <td width="60%"></td>
+         </tr> 
+         <tr>
+           <td><input  type='text' name="filtro_codigo_produto" value="<?php echo e($filtros->filtro_codigo_produto); ?>" size="10" maxlength="10" ></td>
+           <td><input  type='text' name="filtro_nome_produto"   value="<?php echo e($filtros->filtro_nome_produto); ?>"   size="30" maxlength="30" ></td>
+           <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>
+         </tr>
+      </table>
+
+   </form>
+
+</div>
+
+<!-- monta o grid -->
+<!--  -->
+<div class="div_grid">
+   <table class="table table-condensed table-bordered table-hover">            
+      <tr class="cor_azul2">
+         <td width='10%'>
+            <?php Infra_Html::criar_link_com_permissao( 'incluir'  );?>
+            <?php Infra_Html::criar_link_com_permissao( 'imprimir' );?>
+         </td>               
+         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Sigla', 'codigo_produto' );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Nome', 'nome_produto' );?></td>
+      </tr>
+      <?php foreach( $data as $item ): ?>
+         <tr>
+            <td>
+               <?php
+               Infra_Html::criar_link_com_permissao( 'consultar', $item->id_produto );
+               Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_produto );
+               Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_produto );
+               ?>
+            </td>
+            <td><?php echo e($item->codigo_produto); ?></td>
+            <td><?php echo e($item->nome_produto); ?></td>
+         </tr>
+      <?php endforeach; ?>               
+   </table>
+</div>    
+
+<!-- monta o paginador -->
+<!--  -->
+<div class="div_paginator">        
+   <?php echo $data->links(); ?>
+
 </div>
 
 <?php $__env->stopSection(); ?>

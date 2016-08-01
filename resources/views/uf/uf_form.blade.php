@@ -1,61 +1,56 @@
 <?php
-/**************************************************************************************
+
+/******************************************************************************************************
 *
-* View.....: uf_exibir_form
+* View.....: uf_form
 * Descrição: Cadastro de UF
 * Objetivo.: Exibir Formulário para: incluir, alterar, excluir, consultar e imprimir
 *
-***************************************************************************************/
+******************************************************************************************************/
 
-use App\Core\Infra\Infra_Html; // provisório :  por o apelido no /var/www/laravel5/config/app.php:
-use App\Core\Hlp\Hlp_View;
+use App\Core\Infra\Infra_Html;
+use App\Core\Infra\Infra_View;
 
 $titulo = 'Cadastro de UF';
 
-//dd($data);
+Infra_Html::set_errors( $errors );
+
 ?>
 
 @extends('layouts.layout_sistema')
-
 @section('content')
-<div class="row">
-   <div class="col-md-10 col-md-offset-1">
-      
-      <!-- título -->
-      <div class="div_titulo">{{hlp_view::obter_titulo($data->acao)}} - {{$titulo}}</div>
-         
+   
+<?=Infra_Html::exibir_titulo_form( $titulo, $data->acao ) ?>
 
-      <form action="{{url('uf/confirmar')}}" method="post"  role="form">
-      
-         <div class="div_form">  
-            <!-- inputs hidden -->
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <input type="hidden" name="acao"   value="{{$data->acao}}">
-            <input type="hidden" name="id_uf"  value="{{$data->id_uf}}">
-            <input type="hidden" id="readonly"   name="readonly"   value="{{$data->readonly}}" >
+<form action="{{url('uf/confirmar')}}" method="post"  role="form" >
 
-            <table border="0" width="100%">
-               <tr><td align="right" colspan="2">* campos obrigatórios</td></tr>            
-               
-               <!--  
-                  desenhar interface
-               -->
-               <tr class='obrigatorio'>
-                  <td width="15%">Sigla*</td>
-                  <td width="85%">Nome*</td>
-               </tr>
-               <tr>
-                  <td><input  type='text' name="sigla_uf" value="{{$data->sigla_uf}}" size="3"  maxlength="2"  {{$data->readonly}} ></td>
-                  <td><input  type='text' name="nome_uf"  value="{{$data->nome_uf}}"  size="60" maxlength="60" {{$data->readonly}} ></td>
-               </tr>               
-            </table> 
-         </div>
+   <div class="div_form">
+      <?=Infra_Html::exibir_string_campos_obrigatorios() ?>
 
-         @include('layouts.exibir_botoes')
-         @include('layouts.exibir_erros')
-         
-      </form>   
+      <!-- input hidden -->
+      <?= Infra_Html::input_hidden( '_token',   csrf_token()    ); ?>
+      <?= Infra_Html::input_hidden( 'acao',     $data->acao     ); ?>
+      <?= Infra_Html::input_hidden( 'readonly', $data->readonly ); ?>
+      <?= Infra_Html::input_hidden( 'id_uf',    $data->id_uf    ); ?>
+
+      <!--  desenhar interface -->
+      <!-- -->      
+      <table border="0" width="100%">      
+         <tr class='obrigatorio'>
+            <td width="15%" {{Infra_Html::obrigatorio('sigla_uf')}}>Sigla*</td>
+            <td width="85%">Nome*</td>
+         </tr>
+         <tr>
+            <td><?= Infra_Html::input_text( 'sigla_uf', $data->sigla_uf, 3,  2,  $data->readonly ); ?></td>                                
+            <td><?= Infra_Html::input_text( 'nome_uf',  $data->nome_uf,  60, 60, $data->readonly ); ?></td>            
+         </tr>               
+      </table> 
 
    </div>
-</div>
+
+   @include('layouts.exibir_botoes')
+   @include('layouts.exibir_erros')
+         
+</form>
+
 @endsection

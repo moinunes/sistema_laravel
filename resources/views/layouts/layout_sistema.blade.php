@@ -95,9 +95,12 @@ use App\Core\Infra\Infra_Menu;
    </nav>
 
     <div class="container-fluid">
-	   @yield('content')
-    </div>
-
+      <div class="row">  
+         <div class="col-md-10 col-md-offset-1">
+	        @yield('content')
+         </div>
+      </div>
+   </div>
    
 </body>
 </html>

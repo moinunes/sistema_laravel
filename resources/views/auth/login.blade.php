@@ -1,3 +1,11 @@
+<?php
+
+$x = encrypt('sucesso');
+print $x;
+$x = decrypt($x);
+print $x;
+?>
+
 @extends('layouts.app')
 
 @section('content')

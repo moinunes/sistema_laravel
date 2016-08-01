@@ -10,7 +10,7 @@ use App\Core\Infra\Infra_Relatorio;
 use DB;
 use Validator;
 use Input;
- 
+use Crypt; 
 use Illuminate\Http\Request;
 
 class UserRepository extends User {
@@ -48,13 +48,10 @@ class UserRepository extends User {
       $this->_request = $request;
       $this->_obter_regras( $regras );
       $this->validacao = Validator::make( $request , $regras );
-      if ( $this->validacao->passes() ) {
-         //dd($request);
+      if ( $this->validacao->passes() ) {      
          $user = User::findOrFail( $request['id'] );
-         $user->name = $request['name'];
-         $user->name  = $request['email'];       
-    
-         $user->update( $request );
+         $this->igualar_objeto( $user ) ;             
+         $user->save();        
          $this->tudo_ok = true;
       }
    } // alterar
@@ -68,7 +65,8 @@ class UserRepository extends User {
    public function igualar_objeto( &$user ) {
       $user->id    = $this->_request['id'   ];  
       $user->name  = $this->_request['name'];
-      $user->email = $this->_request['email' ];          
+      $user->email = $this->_request['email' ];
+      $user->password =  bcrypt($this->_request['password']);    
    } // igualar_objeto
 
    /** 
@@ -89,6 +87,8 @@ class UserRepository extends User {
       $resultado->id    = $achou ? $user->id    : null;
       $resultado->name  = $achou ? $user->name  : null;
       $resultado->email = $achou ? $user->email : null;
+      $resultado->password = null;
+      $resultado->password_confirmation = null;
    } // igualar_formulario
 
    /** 

@@ -31,6 +31,9 @@ class UfRepository extends Uf {
       $this->_request = $request;      
       $this->_obter_regras( $regras );
       $this->validacao = Validator::make( $request , $regras );
+
+      
+
       if ( $this->validacao->passes() ) {
          $uf = new Uf();
          $this->igualar_objeto( $uf ) ;

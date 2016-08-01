@@ -58,6 +58,8 @@ class UfController extends MeuController {
    * Confirma a Inclusao, alteração e exclusão
    */
    public function Confirmar() {      
+
+      
       switch ( Input::get('acao') ) {
          case 'incluir':
             $this->UfRepository->Incluir( Input::all() );

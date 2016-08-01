@@ -37,7 +37,8 @@ class UserController extends MeuController {
    public function exibir_grid() {
       $this->UserRepository->obter_filtro( $resultado );
       $data = User::whereRaw( $resultado->where )->orderBy( $resultado->ordem )
-                                                 ->paginate( $this->registros_por_pagina );   
+                                                 ->paginate( $this->registros_por_pagina ); 
+
       return view( 'user.user_grid' )->with( 'data', $data )
                                      ->with( 'filtros', $resultado->inputs );
    } // exibir_grid
@@ -47,8 +48,9 @@ class UserController extends MeuController {
    */
    public function exibir_form( $acao, $id = null ) {
       Infra_Filtro::manter_filtros( 'S' );
-      $this->UserRepository->acao = $acao;
+      $this->UserRepository->acao = $acao;    
       $this->UserRepository->igualar_formulario( $data, $id );
+        //dd($data);
       return view( 'user.user_form' )->with( 'data',     $data  )
                                      ->with( 'acao',     $acao  );
    } // exibir_form   

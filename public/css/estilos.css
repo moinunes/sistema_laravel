@@ -10,6 +10,11 @@
 .cor_azul1 { background-color:#EDF6F9;}
 .cor_azul2 { background-color:#EbF2F2;}
 
+.cor_vermelha {
+   background-color:#EDF6F9;
+   color:red;
+}
+
 .ul {  
   padding-left:0px;
   margin:0px;
@@ -155,8 +160,9 @@
 
 .btn_filtrar { 
    margin: 0px;
-   padding:2px;
-   width: 66px;
+   padding:1px;
+   width: 60px;
+   height: 22px; 
    border:none;  
    color:#ffffff; 
    font-size: 14px; 
@@ -169,8 +175,8 @@
 
 .btn_confirmar {  
    float:left;   
-   width:85px;
-   height: 25px;
+   width: 72px;
+   height: 22px; 
    text-align: center;
    font-family: arial;
    font-size:14px;    
@@ -185,9 +191,9 @@
 
 .btn_cancelar { 
    float:left; 
-   width:85px;
-   height: 25px;
-   padding-top:2px;
+   width: 72px;
+   height: 22px; 
+   padding-top:1px;
    text-align: center;
    font-family: arial;
    font-size:14px;    
@@ -202,20 +208,18 @@
 
 
 .btn_voltar { 
-   float:left; 
-   width:85px;
-   height: 25px;
-   padding-top:2px;
+   float:left;
+   width: 72px;
+   height: 22px; 
    text-align: center;
    font-family: arial;
    font-size:14px;    
    border:none;   
    border-radius:4px;
-   background:#003000;
+   background:#009A3E;
    color:#ffffff;
 }
 .btn_voltar:hover {
-   background:#ddd;   
    color:#ffffff;  
 }
 
@@ -252,6 +256,17 @@
    color:#000;  
 }
 
+.btn_incluir { 
+   margin: 0px;
+   padding:3px;
+   height: 23px;
+   width: 23px;
+   border:none;  
+   color:#009A3E; 
+   font-size: 16px; 
+   background:#d0e9c6;
+}
+
 .negrito {
  font-weight: bold;
 }
@@ -278,4 +293,19 @@ fieldset.fsStyle {
    padding-bottom:5px;   
    margin-bottom: 10px;
 }
+
+input[type=text]{
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    box-shadow: 1px 1px 2px #FFF;    
+    -moz-box-shadow: 1px 1px 2px #333333;
+    -webkit-box-shadow: 1px 1px 2px #333333;
+    background: #ffffff; 
+    border:1px solid #c1e2b3
+}
+input[type=text]:hover, textarea:hover{ 
+   background: #FFFFFF; border:1px solid #38B0DE;
+}
+
 

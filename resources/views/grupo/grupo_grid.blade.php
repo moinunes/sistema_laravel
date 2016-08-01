@@ -1,14 +1,14 @@
 <?php
 
-/**************************************************************************
+/******************************************************************************************************
 *
-* View.....: grupo_exibir_grid 
+* View.....: grupo_grid 
 * Descrição: Cadastro de grupo
 * Objetivo.: Montar Formulário de pesquisa e exibir registros na grid
 *
-***************************************************************************/
+******************************************************************************************************/
 
-use App\Core\Infra\Infra_Html; // provisório :  por o apelido no /var/www/laravel5/config/app.php:
+use App\Core\Infra\Infra_Html;
 
 $titulo = 'Cadastro - Grupo';
 
@@ -17,76 +17,64 @@ $titulo = 'Cadastro - Grupo';
 @extends('layouts.layout_sistema')
 @section('content')
 
-<div class="row">  
-   <div class="col-md-10 col-md-offset-1">
+<div class="div_titulo">{{$titulo}}</div>
+         
+<!-- monta os filtros para pesquisa -->
+<!--  -->
+<div class="div_filtro">
 
-         <div class="div_titulo">{{$titulo}}</div>
-         <!-- monta os filtros para pesquisa -->
-         <div class="div_filtro">
-            
-            <form action="{{url('grupo')}}" method="post" class="col-sm-12 form-horizontal" role="form">
+   <?= Infra_Html::Form( 'formulario' ); ?>
 
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+      <?= Infra_Html::input_hidden( '_token',  csrf_token() ); ?>
 
-               <table class="table-responsive" width="50%" border="0">
-                  <tr>
-                     <td width="25%">Grupo</td>
-                     <td width="25%">Descrição</td>
-                     <td width="10%"></td>
-                  </tr> 
-                  <tr>
-                    <td><input  type='text' name="filtro_grupo"     value="{{$filtros->filtro_grupo}}"     size="8"   maxlength="10" ></td>
-                    <td><input  type='text' name="filtro_descricao" value="{{$filtros->filtro_descricao}}" size="40"  maxlength="50" ></td>
-                    <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>                  
-               </table>
-           </form>
-         </div>
+      <table class="table-responsive" width="100%" border="0">
+         <tr>
+            <td width="10%">Grupo</td>
+            <td width="35%">Descrição</td>
+            <td width="55%"></td>
+         </tr> 
+         <tr>
+           <td><input  type='text' name="filtro_grupo"     value="{{$filtros->filtro_grupo}}"     size="8"   maxlength="10" ></td>
+           <td><input  type='text' name="filtro_descricao" value="{{$filtros->filtro_descricao}}" size="40"  maxlength="50" ></td>
+           <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>                  
+      </table>
+   </form>
 
-         <div class="div_grid">  
-      
-          <!-- exibe a grid da pesquisa -->
-          <table class="table table-condensed table-bordered table-hover">
-              <thead>
-                  <tr class="cor_azul2">
-                      <th width='20%'  >
-                        <?php
-                        //Infra_Html::criar_link_com_permissao( 'incluir'  );
-                        //Infra_Html::criar_link_com_permissao( 'imprimir' );
-                        ?>
-                        <a href='/grupo/incluir'><span class='btn btn-success glyphicon glyphicon-plus btn_incluir'></span></a>
-                        <a href='/grupo/imprimir'><span class='btn glyphicon glyphicon-print'></span></a>
-                      </th>                      
-                      <th width='20%'><a href="/grupo/?ordem=grupo">Grupo</a></th>
-                      <th width='60%'><a href="/grupo/?ordem=descricao">Descrição</a></th>                        
-                  </tr>
-
-              </thead>
-
-              <tbody>
-                  @foreach ( $data as $item )                   
-                    <tr>
-                      <td>
-                         <?php
-                             Infra_Html::criar_link_com_permissao( 'consultar', $item->id_grupo );
-                              Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_grupo );
-                             Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_grupo );
-                              ?>
-                      </td>              
-                      <td>{{ $item->grupo}}</td>
-                      <td>{{ $item->descricao}}</td>
-                  </tr>
-                 @endforeach
-
-              </tbody>
-
-           </table>
-      </div>    
-
-      <div class="div_paginator">        
-         {!! $data->links() !!}
-      </div>
-      
-   </div>    
 </div>
+
+<!-- monta o grid -->
+<!--  -->
+<div class="div_grid">
+   <table class="table table-condensed table-bordered table-hover">            
+      <tr class="cor_azul2">
+         <td width='10%'>
+            <?php Infra_Html::criar_link_com_permissao( 'incluir'  );?>
+            <?php Infra_Html::criar_link_com_permissao( 'imprimir' );?>
+         </td>               
+         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Grupo',     'grupo'     );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Descrição', 'descricao' );?></td>
+      </tr>
+      @foreach ( $data as $item )
+         <tr>
+            <td>
+               <?php
+               Infra_Html::criar_link_com_permissao( 'consultar', $item->id_grupo );
+               Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_grupo );
+               Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_grupo );
+               ?>
+            </td>
+            <td>{{$item->grupo}}</td>
+            <td>{{$item->descricao}}</td>
+         </tr>
+      @endforeach               
+   </table>
+</div>    
+
+<!-- monta o paginador -->
+<!--  -->
+<div class="div_paginator">        
+   {!! $data->links() !!}
+</div>
+      
 
 @endsection

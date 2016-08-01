@@ -1,14 +1,14 @@
 <?php
 
-/**************************************************************************
+/******************************************************************************************************
 *
 * View.....: uf_grid 
 * Descrição: Cadastro de uf
 * Objetivo.: Montar Formulário de pesquisa e exibir registros na grid
 *
-***************************************************************************/
+******************************************************************************************************/
 
-use App\Core\Infra\Infra_Html; // provisório :  por o apelido no /var/www/laravel5/config/app.php:
+use App\Core\Infra\Infra_Html;
 
 $titulo = 'Cadastro - UF';
 
@@ -17,73 +17,68 @@ $titulo = 'Cadastro - UF';
 
 <?php $__env->startSection('content'); ?>
 
-<div class="row">  
-   <div class="col-md-10 col-md-offset-1">
-
-         <div class="div_titulo"><?php echo e($titulo); ?></div>
+<div class="div_titulo"><?php echo e($titulo); ?></div>
          
-         <!-- monta os filtros para pesquisa -->         
-         <div class="div_filtro">
-            <form action="<?php echo e(url('uf')); ?>" method="post" class="col-sm-12 form-horizontal" role="form">
-               <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-               <table class="table-responsive" width="50%" border="0">
-                  <tr>
-                     <td width="25%">Sigla</td>
-                     <td width="65%">Nome</td>
-                     <td width="10%"></td>
-                  </tr> 
-                  <tr>
-                    <td><input  type='text' name="filtro_sigla_uf" value="<?php echo e($filtros->filtro_sigla_uf); ?>" size="8"  maxlength="10" ></td>
-                    <td><input  type='text' name="filtro_nome_uf"  value="<?php echo e($filtros->filtro_nome_uf); ?>"  size="30" maxlength="30" ></td>
-                    <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>
-                  </tr>
-               </table>
-            </form>
-         </div>
+<!-- monta os filtros para pesquisa -->
+<!--  -->
+<div class="div_filtro">
 
-         <div class="div_grid">      
-            <!-- exibe a grid da pesquisa -->
-            <table class="table table-condensed table-bordered table-hover">
-               <thead>
-                     <tr class="cor_azul2">
-                        <th width='20%'  >
-                        <?php
-                        Infra_Html::criar_link_com_permissao( 'incluir'  );
-                        Infra_Html::criar_link_com_permissao( 'imprimir' );
-                        ?>
-                        
-                        
-                        </th>                      
-                        <th width='20%'><a href="/uf/?ordem=sigla_uf">Sigla</a></th>
-                        <th width='60%'><a href="/uf/?ordem=nome_uf">Nome</a></th>                         
-                     </tr>
-               </thead>
+   <?= Infra_Html::Form( 'formulario' ); ?>
 
-               <tbody>
-                  <?php foreach( $data as $item ): ?>                   
-                     <tr>
-                        <td>
-                           <?php
-                           Infra_Html::criar_link_com_permissao( 'consultar', $item->id_uf );
-                           Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_uf );
-                           Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_uf );
-                           ?>
-                        </td>              
-                        <td><?php echo e($item->sigla_uf); ?></td>
-                        <td><?php echo e($item->nome_uf); ?></td>                
-                     </tr>
-                  <?php endforeach; ?>
-               </tbody>
-            </table>
-      </div>    
+      <?= Infra_Html::input_hidden( '_token',  csrf_token() ); ?>
 
-      <div class="div_paginator">        
-         <?php echo $data->links(); ?>
+      <table class="table-responsive" width="100%" border="0">
+         <tr>
+            <td width="5%">Sigla</td>
+            <td width="30%">Nome</td>
+            <td width="65%"></td>
+         </tr> 
+         <tr>
+           <td><?= Infra_Html::input_text( 'filtro_sigla_uf', $filtros->filtro_sigla_uf, 4,  2  ); ?></td>
+           <td><?= Infra_Html::input_text( 'filtro_nome_uf',  $filtros->filtro_nome_uf,  30, 30 ); ?></td>                    
+           <td><?= Infra_Html::input_submit( 'Filtrar', 'btn_filtrar' ); ?></td>                    
+         </tr>
+      </table>
 
-      </div>
-      
-   </div>    
+   </form>
+
 </div>
+
+<!-- monta o grid -->
+<!--  -->
+<div class="div_grid">
+   <table class="table table-condensed table-bordered table-hover">            
+      <tr class="cor_azul2">
+         <td width='10%'>
+            <?php Infra_Html::criar_link_com_permissao( 'incluir'  );?>
+            <?php Infra_Html::criar_link_com_permissao( 'imprimir' );?>
+         </td>               
+         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Sigla', 'sigla_uf' );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Nome', 'nome_uf' );?></td>
+      </tr>
+      <?php foreach( $data as $item ): ?>
+         <tr>
+            <td>
+               <?php
+               Infra_Html::criar_link_com_permissao( 'consultar', $item->id_uf );
+               Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_uf );
+               Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_uf );
+               ?>
+            </td>
+            <td><?php echo e($item->sigla_uf); ?></td>
+            <td><?php echo e($item->nome_uf); ?></td>
+         </tr>
+      <?php endforeach; ?>               
+   </table>
+</div>    
+
+<!-- monta o paginador -->
+<!--  -->
+<div class="div_paginator">        
+   <?php echo $data->links(); ?>
+
+</div>
+      
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.layout_sistema', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

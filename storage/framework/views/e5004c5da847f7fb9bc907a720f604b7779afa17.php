@@ -1,3 +1,13 @@
+<?php
+
+$x = encrypt('sucesso');
+print $x;
+$x = decrypt($x);
+print $x;
+?>
+
+
+
 <?php $__env->startSection('content'); ?>
 
 <div class="container">

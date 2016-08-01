@@ -1,20 +1,19 @@
 <?php
 
-/**************************************************************************************************
+/******************************************************************************************************
 *
 * exibir_botoes.blade.php
 *
-* objetivo: Exibir os botões 'Cancelar  Confirmar ou Voltar' de acordo com a ação
+* objetivo: Exibir os botões 'Cancelar  Confirmar' ou Voltar de acordo com a ação
 *
-***************************************************************************************************/
+******************************************************************************************************/
 
 $controller = Request::segment(1);
 
 ?>
 
-@if ( $data->acao == 'consultar' )                  
-   
-   <table width="100%" border="0" class="cor_titulo">
+@if ( $data->acao == 'consultar' ) 
+   <table width="100%" border="0" class="cor_form">
       <tr>
          <td width="50%">
             <a href="/<?=$controller ?>/cancelar" class="pull-right btn_voltar">Voltar</a>
@@ -22,7 +21,7 @@ $controller = Request::segment(1);
       </tr>
    </table>
 @else
-   <table width="100%" border="0" >
+   <table width="100%" border="0" class="cor_form">
       <tr>
          <td width="50%">
             <a href="/<?=$controller ?>/cancelar" class="btn_cancelar">Cancelar</a>
@@ -32,4 +31,4 @@ $controller = Request::segment(1);
          </td>
       </tr>
    </table>
-@endif             
+@endif
