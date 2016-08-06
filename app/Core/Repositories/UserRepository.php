@@ -56,19 +56,7 @@ class UserRepository extends User {
       }
    } // alterar
 
-   /** 
-   * iguala o objeto
-   *
-   * @param object      atributos para persistir
-   *
-   */
-   public function igualar_objeto( &$user ) {
-      $user->id    = $this->_request['id'   ];  
-      $user->name  = $this->_request['name'];
-      $user->email = $this->_request['email' ];
-      $user->password =  bcrypt($this->_request['password']);    
-   } // igualar_objeto
-
+ 
    /** 
    * iguala o formulário
    *
@@ -84,12 +72,33 @@ class UserRepository extends User {
       $resultado->readonly = ( $this->acao == 'consultar' || $this->acao == 'excluir' ) ? 'readonly' : '';
       $resultado->achou    = $achou;
      
-      $resultado->id    = $achou ? $user->id    : null;
-      $resultado->name  = $achou ? $user->name  : null;
-      $resultado->email = $achou ? $user->email : null;
-      $resultado->password = null;
-      $resultado->password_confirmation = null;
+      $resultado->id              = $achou ? $user->id    : null;
+      $resultado->nome            = $achou ? $user->nome  : null;
+      $resultado->usuario         = $achou ? $user->usuario  : null;
+      $resultado->email           = $achou ? $user->email : null;
+//dd($this->acao);
+      $resultado->password           = $this->acao == 'alterar' ? 'null' : '';
+      $resultado->password_confirmar = $this->acao == 'alterar' ? 'null' : '';
+
+//dd($resultado);
    } // igualar_formulario
+
+  /** 
+   * iguala o objeto
+   *
+   * @param object      atributos para persistir
+   *
+   */
+   public function igualar_objeto( &$user ) {
+      $user->id       = $this->_request['id'   ];  
+      $user->nome     = $this->_request['nome' ];
+      $user->usuario  = $this->_request['usuario' ];
+      $user->email    = $this->_request['email'];      
+      if ( ( $this->_request['acao'] == 'incluir' ) || 
+           ( $this->_request['acao'] == 'alterar' && $this->_request['password'] != 'null' ) ) {
+         $user->password = Crypt::encrypt($this->_request['password']);
+      }
+   } // igualar_objeto
 
    /** 
    * exclui o registro
@@ -100,7 +109,7 @@ class UserRepository extends User {
       $user = User::find( $id );
       $user->delete();
       $this->tudo_ok = true;      
-   } // Excluirr
+   } // Excluir
 
    /**
    * obtém os filtros
@@ -112,17 +121,22 @@ class UserRepository extends User {
       // define os nomes dos filtros
       $infra_filtro = new Infra_Filtro(); 
       $infra_filtro->nomes_filtros  = new \stdClass();
-      $infra_filtro->nomes_filtros->filtro_name     = '';
-      $infra_filtro->nomes_filtros->filtro_email = '';
-      $infra_filtro->ordem_default = 'name';
+      $infra_filtro->nomes_filtros->filtro_nome    = '';
+      $infra_filtro->nomes_filtros->filtro_usuario = '';
+      $infra_filtro->nomes_filtros->filtro_email   = '';
+      $infra_filtro->ordem_default = 'nome';
 
       // prepara os filtros
       $infra_filtro->preparar_filtros();
 
       // monta os filtros
-      if ( $infra_filtro->inputs->filtro_name != '' ) {         
-         $filtro[] = "( name like '%{$infra_filtro->inputs->filtro_name}%' )";
+      if ( $infra_filtro->inputs->filtro_nome != '' ) {         
+         $filtro[] = "( nome like '%{$infra_filtro->inputs->filtro_nome}%' )";
       }
+      if ( $infra_filtro->inputs->filtro_usuario != '' ) {         
+         $filtro[] = "( usuario like '%{$infra_filtro->inputs->filtro_usuario}%' )";
+      }
+      
       if ( $infra_filtro->inputs->filtro_email != '' ) {
          $filtro[] = "email LIKE '%{$infra_filtro->inputs->filtro_email}%'";
       }  
@@ -139,8 +153,8 @@ class UserRepository extends User {
    public function imprimir() {
          $filtro = array();
       Infra_Filtro::obter_array_filtros( $filtros );   
-      if ( $filtros->inputs->filtro_name != '' ) {         
-         $filtro[] = "( name like '%{$filtros->inputs->filtro_name}%' )";
+      if ( $filtros->inputs->filtro_nome != '' ) {         
+         $filtro[] = "( nome like '%{$filtros->inputs->filtro_nome}%' )";
       }
       if ( $filtros->inputs->filtro_email != '' ) {
          $filtro[] = "email LIKE '%{$filtros->inputs->filtro_email}%'";
@@ -161,7 +175,7 @@ class UserRepository extends User {
       $rel->SetFont('Arial', '', 11);            
       foreach ( $rs as $index => $registro) {
          $rel->Ln( 7 );
-         $rel->Cell(20, 8, $registro->name,     0, 0, 'L');
+         $rel->Cell(20, 8, $registro->nome,     0, 0, 'L');
          $rel->Cell(80, 8, utf8_decode($registro->email),  0, 0, 'L');
       }
       $rel->Output();
@@ -170,8 +184,11 @@ class UserRepository extends User {
 
    private function _obter_regras( &$regras ) {
       $id = Input::get('id');
-      $regras = [ 'name' => 'required|min:2|max:40|unique:users,name,'.$id.',id',
-                  'email'  => 'required',
+      $regras = [ 'nome'     => 'required|min:2|max:40|unique:users,nome,'.$id.',id',
+                  'email'    => 'required|min:2|max:40|unique:users,email,'.$id.',id',
+                  'usuario'  => 'required|min:2|max:30|unique:users,usuario,'.$id.',id',                  
+                  'password'           => 'required',                  
+                  'password_confirmar' => 'required|same:password'   
                 ];
    } // obter_regras
 

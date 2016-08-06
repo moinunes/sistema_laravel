@@ -57,7 +57,7 @@ $titulo = 'Cadastro de Grupo';
             <td>
                <select id="usuarios_disponiveis" name="usuarios_disponiveis"  size=10 multiple="multiple" style="width:290px">
                   @foreach ( $usuarios_disponiveis AS $item )
-                     <option value="{{$item->id}}"><?= $item->name;?></option>
+                     <option value="{{$item->id}}"><?= $item->nome;?></option>
                   @endforeach                        
                </select>
             </td>
@@ -68,7 +68,7 @@ $titulo = 'Cadastro de Grupo';
             <td>
                <select id="usuarios_selecionados" name="usuarios_selecionados[]"  size=10 multiple="multiple" style="width:290px">
                   @foreach ( $usuarios_selecionados AS $item ) 
-                     <option  value="{{$item->id}}"><?= $item->name;?></option>
+                     <option  value="{{$item->id}}"><?= $item->nome;?></option>
                   @endforeach                        
                </select>
             </td>

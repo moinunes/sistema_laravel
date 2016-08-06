@@ -14,9 +14,9 @@ class CreateTbprodutoTable extends Migration {
       
       if ( !Schema::hasTable('tbproduto') ) {
          Schema::create('tbproduto', function (Blueprint $table) {
-            $table->increments('id_produto');
-            $table->string('codigo_produto',  50 );            
-            $table->string('nome_produto',    100 );            
+            $table->increments('id_produto' );
+            $table->string('codigo',    50  );            
+            $table->string('descricao', 100 );            
             $table->integer('quantidade'   )->nullable();
             $table->decimal('preco',10,2 )->nullable();  
             $table->integer('id_fornecedor');

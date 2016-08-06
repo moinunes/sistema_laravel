@@ -199,7 +199,7 @@ class GrupoRepository extends Grupo {
       $id_grupo = $id_grupo != '' ? $id_grupo : 0;
       $sql= " SELECT
                    id,
-                   name  
+                   nome  
               FROM users     
               WHERE users.id NOT IN ( SELECT
                                           id_user
@@ -216,7 +216,7 @@ class GrupoRepository extends Grupo {
       $id_grupo = $id_grupo != '' ? $id_grupo : 0; 
       $sql = " SELECT
                        users.id,
-                       users.name
+                       users.nome
                   FROM users
                   JOIN  tbgrupo_user ON ( tbgrupo_user.id_user = users.id )
                   WHERE tbgrupo_user.id_grupo = $id_grupo

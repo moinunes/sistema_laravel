@@ -36,15 +36,15 @@ class BuscaController extends Controller {
    */
    public function buscar_fornecedor( &$data, &$inputs ) {
       $inputs = new \stdClass();      
-      $inputs->filtro_codigo_fornecedor = Input::get('filtro_codigo_fornecedor' ) != '' ? Input::get('filtro_codigo_fornecedor' ) : '';
-      $inputs->filtro_nome_fornecedor   = Input::get('filtro_nome_fornecedor'   ) != '' ? Input::get('filtro_nome_fornecedor'   ) : '';
-      $inputs->order                    = Input::get('order')                     != '' ? Input::get('order')                     : 'nome_fornecedor';
+      $inputs->filtro_codigo = Input::get('filtro_codigo' ) != '' ? Input::get('filtro_codigo' ) : '';
+      $inputs->filtro_nome   = Input::get('filtro_nome'   ) != '' ? Input::get('filtro_nome'   ) : '';
+      $inputs->order                    = Input::get('order')                     != '' ? Input::get('order')                     : 'nome';
       $filtro = array();
-      if ( $inputs->filtro_codigo_fornecedor != '' ) {
-         $filtro[] = "( codigo_fornecedor like '%{$inputs->filtro_codigo_fornecedor}%' )";
+      if ( $inputs->filtro_codigo != '' ) {
+         $filtro[] = "( codigo like '%{$inputs->filtro_codigo}%' )";
       }
-      if ( $inputs->filtro_nome_fornecedor != '' ) {
-         $filtro[] = "nome_fornecedor LIKE '%{$inputs->filtro_nome_fornecedor}%'";
+      if ( $inputs->filtro_nome != '' ) {
+         $filtro[] = "nome LIKE '%{$inputs->filtro_nome}%'";
       }
       $filtros = count($filtro)>0 ? join( ' AND ', $filtro ) : '1=1';            
       $data = Fornecedor::whereRaw( $filtros )->orderBy( $inputs->order  )

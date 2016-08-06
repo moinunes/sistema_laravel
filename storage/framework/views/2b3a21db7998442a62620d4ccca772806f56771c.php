@@ -12,6 +12,10 @@ use App\Core\Infra\Infra_Html;
 use App\Core\Infra\Infra_View;
 
 $titulo = 'Cadastro de Produto';
+
+Infra_Html::set_errors( $errors );
+
+//print_r($data);die();
 ?>
 
 
@@ -38,19 +42,19 @@ $titulo = 'Cadastro de Produto';
          <tr>
             <td colspan="2">
                <fieldset class="fsStyle" style="width:45%">
-                  <legend class="legendStyle">Fornecedor*</legend>
+                  <legend class="legendStyle <?php echo e(Infra_Html::obrigatorio('id_fornecedor')); ?>" >Fornecedor*</legend>
                   <table border="0" width="100%">
-                     <tr class='padrao'>
-                        <td width="30%">Código</td>
-                        <td width="65%">Descrição</td>
+                     <tr >
+                        <td width="30%" >Código</td>
+                        <td width="65%">Descrição<td>
                         <td width="5%"></td>
                      </tr>
                      <tr>
                         <td>
                            <input  type='hidden' id="id_fornecedor"     name="id_fornecedor"     value="<?php echo e($data->id_fornecedor); ?>"     size="8"  maxlength="10" readonly='$data->readonly' >
-                           <input  type='text'   id="codigo_fornecedor" name="codigo_fornecedor" value="<?php echo e($data->codigo_fornecedor); ?>" size="8"  maxlength="10" readonly='$data->readonly' >
+                           <input  type='text'   id="fornecedor_codigo" name="fornecedor_codigo" value="<?php echo e($data->fornecedor_codigo); ?>" size="8"  maxlength="10" readonly='$data->readonly' >
                         </td>
-                        <td><input type='text'   id="nome_fornecedor" name="nome_fornecedor" value="<?php echo e($data->nome_fornecedor); ?>" size="40" maxlength="40" readonly='$data->readonly' ></td>
+                        <td><input type='text'   id="fornecedor_nome" name="fornecedor_nome" value="<?php echo e($data->fornecedor_nome); ?>" size="40" maxlength="40" readonly='$data->readonly' ></td>
                         <td>
                            <input type="button" onclick="buscar_fornecedor()" value=">>" />
                         </td>
@@ -61,13 +65,21 @@ $titulo = 'Cadastro de Produto';
          </tr>
 
          <tr class='obrigatorio'>
-            <td width="15%">Código*</td>
-            <td width="85%">Descrição*</td>
-         </tr>
+            <td width="15%" class="<?php echo e(Infra_Html::obrigatorio('codigo')); ?>" >Código*   </td>
+            <td width="85%" class="<?php echo e(Infra_Html::obrigatorio('descricao')); ?>"   >Descrição*</td>
+         </tr>         
          <tr>
-            <td><input  type='text' id="codigo_produto" name="codigo_produto" value="<?php echo e($data->codigo_produto); ?>" size="8"  maxlength="10" <?php echo e($data->readonly); ?>></td>
-            <td><input  type='text' id="nome_produto" name="nome_produto" value="<?php echo e($data->nome_produto); ?>" size="60"  maxlength="60" <?php echo e($data->readonly); ?>></td>
-            
+            <td><input  type='text' id="codigo" name="codigo" value="<?php echo e($data->codigo); ?>" size="8"  maxlength="10" <?php echo e($data->readonly); ?>></td>
+            <td><input  type='text' id="descricao"   name="descricao"   value="<?php echo e($data->descricao); ?>" size="60"  maxlength="60" <?php echo e($data->readonly); ?>></td>            
+         </tr>
+
+         <tr class='padrao'>
+            <td width="15%">Quantidade</td>
+            <td width="85%" class="<?php echo e(Infra_Html::obrigatorio('descricao')); ?>">Preço</td>
+         </tr>         
+         <tr>
+            <td><input  type='text' id="quantidade" name="quantidade" value="<?php echo e($data->quantidade); ?>" size="12"  maxlength="12" <?php echo e($data->readonly); ?>></td>
+            <td><input  type='text' id="preco"      name="preco"      value="<?php echo e($data->preco); ?>"      size="12"  maxlength="12" <?php echo e($data->readonly); ?>></td>            
          </tr>
 
       </table> 

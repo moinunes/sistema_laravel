@@ -12,6 +12,7 @@ use App\Core\Infra\Infra_Html;
 use App\Core\Infra\Infra_View;
 
 $titulo = 'Cadastro de Usuários';
+Infra_Html::set_errors( $errors );
 ?>
 
 @extends('layouts.layout_sistema')
@@ -34,19 +35,21 @@ $titulo = 'Cadastro de Usuários';
       <!-- -->      
       <table border="0" width="100%">
          <tr class='obrigatorio'>
-            <td width="40%">Nome*</td>
-            <td width="60%">Email*</td>
+            <td width="40%" class="{{Infra_Html::obrigatorio('nome')}}">Nome completo*</td>
+            <td width="40%" class="{{Infra_Html::obrigatorio('usuario')}}">Usuário*</td>
+            <td width="60%" class="{{Infra_Html::obrigatorio('email')}}">Email*</td>
          </tr>
          <tr>
-            <td><?= Infra_Html::input_text( 'name',  $data->name,  50,  60,  $data->readonly ); ?></td>
-            <td><?= Infra_Html::input_text( 'email', $data->email, 40,  60,  $data->readonly ); ?></td>            
+            <td><?= Infra_Html::input_text( 'nome',  $data->nome,  50,  60,  $data->readonly ); ?></td>
+            <td> <input type="text"  id="usuario" name="usuario" value="{{$data->usuario}}" size='30' maxlengt='30' x-moz-errormessage="usuario inváido" ></td>
+            <td> <input type="email" id="email" name="email" value="{{$data->email}}" size='50' maxlengt='50' x-moz-errormessage="e-mail inválido" ></td>
          </tr>
          
          @if ( $data->acao == 'incluir' || $data->acao == 'alterar' )
             <tr>
                <td colspan="2">
                   <tr class='obrigatorio'>
-                     <td colspan="2">Senha*</td>
+                     <td colspan="2" class="{{Infra_Html::obrigatorio('password')}}">Senha*</td>
                   </tr>
                   <tr>
                      <td colspan="2">
@@ -54,11 +57,11 @@ $titulo = 'Cadastro de Usuários';
                      </td>
                   </tr>
                   <tr class='obrigatorio'>
-                     <td colspan="2">Confirmar Senha*</td>
+                     <td colspan="2" class="{{Infra_Html::obrigatorio('password_confirmar')}}">Confirmar Senha*</td>
                   </tr>
                   <tr>
                      <td colspan="2">
-                        <?= Infra_Html::input_password( 'password_confirmation', $data->password_confirmation, 40,  60,  $data->readonly ); ?>
+                        <?= Infra_Html::input_password( 'password_confirmar', $data->password_confirmar, 40,  60,  $data->readonly ); ?>
                      </td>
                   </tr>               
                </td>

@@ -12,6 +12,9 @@ use App\Core\Infra\Infra_Html;
 use App\Core\Infra\Infra_View;
 
 $titulo = 'Cadastro de Fornecedor';
+
+Infra_Html::set_errors( $errors );
+
 ?>
 
 @extends('layouts.layout_sistema')
@@ -34,12 +37,12 @@ $titulo = 'Cadastro de Fornecedor';
       <!-- -->              
       <table border="0" width="100%">
          <tr class='obrigatorio'>
-            <td width="15%">Código*</td>
-            <td width="85%">Nome*</td>
+            <td width="15%" class="{{Infra_Html::obrigatorio('codigo')}}" >Código*</td>
+            <td width="85%" class="{{Infra_Html::obrigatorio('nome')}}"   >Nome*  </td>
          </tr>
          <tr>
-            <td><?= Infra_Html::input_text( 'codigo_fornecedor', $data->codigo_fornecedor, 10, 10, $data->readonly ); ?></td>
-            <td><?= Infra_Html::input_text( 'nome_fornecedor',  $data->nome_fornecedor,   60, 60, $data->readonly ); ?></td>
+            <td><?= Infra_Html::input_text( 'codigo', $data->codigo, 10, 10, $data->readonly ); ?></td>
+            <td><?= Infra_Html::input_text( 'nome',   $data->nome,   60, 60, $data->readonly ); ?></td>
          </tr>               
       </table> 
    </div>

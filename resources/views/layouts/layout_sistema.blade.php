@@ -14,8 +14,8 @@ use App\Core\Infra\Infra_Menu;
  
    <!-- jquery -->
    <script type="text/javascript" src="/jquery/jquery.js"></script>
-   <script type="text/javascript" src="/jquery/jquery-ui.js"></script>
-   <link href="/jquery/jquery-ui.css" rel="stylesheet">
+   <script type="text/javascript" src="/jquery-ui/jquery-ui.js"></script>
+   <link href="/jquery-ui/jquery-ui.css" rel="stylesheet">
    
    <!-- bootstrap -->
    <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>  
@@ -67,7 +67,7 @@ use App\Core\Infra\Infra_Menu;
                      <td width="10%"></td>
                      <td width="10%"><div class="div_logo"><a target="blank" href="http://laravel.com"><img src="/img/logo.png"></a></div></td>
                      <td width="30%"><div class="title"><?=$nome_sistema?></div></td>
-                     <td width="25%"><div class="text-muted"><?= 'usuário: '.Auth::user()->name?></div></td>
+                     <td width="25%"><div class="text-muted"><?= 'usuário: '.Auth::user()->nome?></div></td>
                      <td width="25%"><div class="text-info"><?=date("d/m/Y")?></div></td>
                   </tr>
                   <tr>

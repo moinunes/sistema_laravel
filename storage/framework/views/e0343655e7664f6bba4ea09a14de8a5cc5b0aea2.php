@@ -34,8 +34,8 @@ $titulo = 'Cadastro - Fornecedor';
             <td width="63%"></td>
          </tr> 
          <tr>
-           <td><?= Infra_Html::input_text( 'filtro_codigo_fornecedor', $filtros->filtro_codigo_fornecedor, 10, 10 ); ?></td>
-           <td><?= Infra_Html::input_text( 'filtro_nome_fornecedor',   $filtros->filtro_nome_fornecedor,   30, 30 ); ?></td>                    
+           <td><?= Infra_Html::input_text( 'filtro_codigo', $filtros->filtro_codigo, 10, 10 ); ?></td>
+           <td><?= Infra_Html::input_text( 'filtro_nome',   $filtros->filtro_nome,   30, 30 ); ?></td>                    
            <td><?= Infra_Html::input_submit( 'Filtrar', 'btn_filtrar' ); ?></td>                    
          </tr>
       </table>
@@ -53,8 +53,8 @@ $titulo = 'Cadastro - Fornecedor';
             <?php Infra_Html::criar_link_com_permissao( 'incluir'  );?>
             <?php Infra_Html::criar_link_com_permissao( 'imprimir' );?>
          </td>               
-         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Código', 'codigo_fornecedor' );?></td>
-         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Nome',   'nome_fornecedor' );?></td>
+         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Código', 'codigo' );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Nome',   'nome' );?></td>
       </tr>
       <?php foreach( $data as $item ): ?>
          <tr>
@@ -65,8 +65,8 @@ $titulo = 'Cadastro - Fornecedor';
                Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_fornecedor );
                ?>
             </td>
-            <td><?php echo e($item->codigo_fornecedor); ?></td>
-            <td><?php echo e($item->nome_fornecedor); ?></td>
+            <td><?php echo e($item->codigo); ?></td>
+            <td><?php echo e($item->nome); ?></td>
          </tr>
       <?php endforeach; ?>               
    </table>

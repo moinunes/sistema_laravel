@@ -92,8 +92,8 @@ class FornecedorController extends MeuController {
    */
    public function definir_regras() {  
       $id_fornecedor = Input::get('id_fornecedor');
-      $this->regras =[ 'codigo_fornecedor' => 'required|min:2|max:20|unique:tbfornecedor',
-                       'nome_fornecedor'   => 'required',
+      $this->regras =[ 'codigo' => 'required|min:2|max:20|unique:tbfornecedor',
+                       'nome'   => 'required',
                     ];      
    } // definir_regras
 
@@ -111,18 +111,18 @@ class FornecedorController extends MeuController {
       $infra_filtro = new Infra_Filtro();
       // define os nomes dos filtros
       $infra_filtro->nomes_filtros                           = new \stdClass();
-      $infra_filtro->nomes_filtros->filtro_codigo_fornecedor = '';
-      $infra_filtro->nomes_filtros->filtro_nome_fornecedor   = '';
-      $infra_filtro->ordem_default = 'codigo_fornecedor';
+      $infra_filtro->nomes_filtros->filtro_codigo = '';
+      $infra_filtro->nomes_filtros->filtro_nome   = '';
+      $infra_filtro->ordem_default = 'codigo';
 
       $infra_filtro->preparar_filtros();
 
       // monta os filtros
-      if ( $infra_filtro->inputs->filtro_codigo_fornecedor != '' ) {         
-         $filtro[] = "( codigo_fornecedor like '%{$infra_filtro->inputs->filtro_codigo_fornecedor}%' )";
+      if ( $infra_filtro->inputs->filtro_codigo != '' ) {         
+         $filtro[] = "( codigo like '%{$infra_filtro->inputs->filtro_codigo}%' )";
       }
-      if ( $infra_filtro->inputs->filtro_nome_fornecedor != '' ) {
-         $filtro[] = "nome_fornecedor LIKE '%{$infra_filtro->inputs->filtro_nome_fornecedor}%'";
+      if ( $infra_filtro->inputs->filtro_nome != '' ) {
+         $filtro[] = "nome LIKE '%{$infra_filtro->inputs->filtro_nome}%'";
       }
     
       $resultado->where  = count($filtro)>0 ? join( ' AND ', $filtro ) : TODOS_REGISTROS;

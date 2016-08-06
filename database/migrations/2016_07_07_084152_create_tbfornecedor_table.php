@@ -16,8 +16,8 @@ class CreateTbfornecedorTable extends Migration {
       if ( !Schema::hasTable('tbfornecedor') ) {
          Schema::create('tbfornecedor', function (Blueprint $table) {
             $table->increments('id_fornecedor');
-            $table->string('codigo_fornecedor', 20 )->nullable();            
-            $table->string('nome_fornecedor', 100  )->nullable();            
+            $table->string('codigo', 20 )->nullable();
+            $table->string('nome', 100  )->nullable();
             $table->timestamps();
          });
       } else {

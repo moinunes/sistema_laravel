@@ -51,8 +51,8 @@ class FornecedorRepository extends Fornecedor {
       
       if ( $this->validacao->passes() ) {
          $fornecedor = Fornecedor::findOrFail( $request['id_fornecedor'] );
-         $fornecedor->codigo_fornecedor = $request['codigo_fornecedor'];
-         $fornecedor->nome_fornecedor   = $request['nome_fornecedor'];       
+         $fornecedor->codigo = $request['codigo'];
+         $fornecedor->nome   = $request['nome'];       
     
          $fornecedor->update( $request );
          $this->tudo_ok = true;
@@ -79,8 +79,8 @@ class FornecedorRepository extends Fornecedor {
    */
    public function igualar_objeto( &$fornecedor ) {
       $fornecedor->id_fornecedor  = $this->_request['id_fornecedor' ];
-      $fornecedor->codigo_fornecedor = $this->_request['codigo_fornecedor'];
-      $fornecedor->nome_fornecedor   = $this->_request['nome_fornecedor'  ];      
+      $fornecedor->codigo = $this->_request['codigo'];
+      $fornecedor->nome   = $this->_request['nome'  ];      
    } // igualar_objeto
 
    /** 
@@ -99,8 +99,8 @@ class FornecedorRepository extends Fornecedor {
       $resultado->achou    = $achou;
 
       $resultado->id_fornecedor     = $achou ? $fornecedor->id_fornecedor     : null;
-      $resultado->codigo_fornecedor = $achou ? $fornecedor->codigo_fornecedor : null;
-      $resultado->nome_fornecedor   = $achou ? $fornecedor->nome_fornecedor   : null;
+      $resultado->codigo = $achou ? $fornecedor->codigo : null;
+      $resultado->nome  = $achou ? $fornecedor->nome   : null;
    } // igualar_formulario
 
    /**
@@ -113,19 +113,19 @@ class FornecedorRepository extends Fornecedor {
       // define os nomes dos filtros
       $infra_filtro = new Infra_Filtro(); 
       $infra_filtro->nomes_filtros  = new \stdClass();
-      $infra_filtro->nomes_filtros->filtro_codigo_fornecedor     = '';
-      $infra_filtro->nomes_filtros->filtro_nome_fornecedor = '';
-      $infra_filtro->ordem_default = 'codigo_fornecedor';
+      $infra_filtro->nomes_filtros->filtro_codigo    = '';
+      $infra_filtro->nomes_filtros->filtro_nome= '';
+      $infra_filtro->ordem_default = 'codigo';
 
       // prepara os filtros
       $infra_filtro->preparar_filtros();
 
       // monta os filtros
-      if ( $infra_filtro->inputs->filtro_codigo_fornecedor != '' ) {         
-         $filtro[] = "( codigo_fornecedor like '%{$infra_filtro->inputs->filtro_codigo_fornecedor}%' )";
+      if ( $infra_filtro->inputs->filtro_codigo != '' ) {    
+         $filtro[] = "( codigo like '%{$infra_filtro->inputs->filtro_codigo}%' )";
       }
-      if ( $infra_filtro->inputs->filtro_nome_fornecedor != '' ) {
-         $filtro[] = "nome_fornecedor LIKE '%{$infra_filtro->inputs->filtro_nome_fornecedor}%'";
+      if ( $infra_filtro->inputs->filtro_nome != '' ) {
+         $filtro[] = "nome LIKE '%{$infra_filtro->inputs->filtro_nome}%'";
       }  
 
       // retorna $resultado
@@ -140,11 +140,11 @@ class FornecedorRepository extends Fornecedor {
    public function imprimir() {
          $filtro = array();
       Infra_Filtro::obter_array_filtros( $filtros );   
-      if ( $filtros->inputs->filtro_codigo_fornecedor != '' ) {         
-         $filtro[] = "( codigo_fornecedor like '%{$filtros->inputs->filtro_codigo_fornecedor}%' )";
+      if ( $filtros->inputs->filtro_codigo != '' ) {         
+         $filtro[] = "( codigo like '%{$filtros->inputs->filtro_codigo}%' )";
       }
-      if ( $filtros->inputs->filtro_nome_fornecedor != '' ) {
-         $filtro[] = "nome_fornecedor LIKE '%{$filtros->inputs->filtro_nome_fornecedor}%'";
+      if ( $filtros->inputs->filtro_nome != '' ) {
+         $filtro[] = "nome LIKE '%{$filtros->inputs->filtro_nome}%'";
       }
       $where = count($filtro)>0 ? join( ' AND ', $filtro ) : TODOS_REGISTROS;
       $ordem = $filtros->ordem;
@@ -162,8 +162,8 @@ class FornecedorRepository extends Fornecedor {
       $rel->SetFont('Arial', '', 11);            
       foreach ( $rs as $index => $registro) {
          $rel->Ln( 7 );
-         $rel->Cell(20, 8, $registro->codigo_fornecedor,     0, 0, 'L');
-         $rel->Cell(80, 8, utf8_decode($registro->nome_fornecedor),  0, 0, 'L');
+         $rel->Cell(20, 8, $registro->codigo,     0, 0, 'L');
+         $rel->Cell(80, 8, utf8_decode($registro->nome),  0, 0, 'L');
       }
       $rel->Output();
       
@@ -171,8 +171,8 @@ class FornecedorRepository extends Fornecedor {
 
    private function _obter_regras( &$regras ) {
       $id_fornecedor = Input::get('id_fornecedor');
-      $regras = [ 'codigo_fornecedor' => 'required|min:2|max:20|unique:tbfornecedor,codigo_fornecedor,'.$id_fornecedor.',id_fornecedor',
-                  'nome_fornecedor'   => 'required',
+      $regras = [ 'codigo' => 'required|min:2|max:20|unique:tbfornecedor,codigo,'.$id_fornecedor.',id_fornecedor',
+                  'nome'   => 'required',
                 ];
    } // obter_regras
 

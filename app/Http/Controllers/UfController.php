@@ -47,7 +47,7 @@ class UfController extends MeuController {
    * Exibe o form
    */
    public function exibir_form( $acao, $id = null ) {
-      Infra_Filtro::manter_filtros( 'S' );
+      Infra_Filtro::manter_filtros( 'S' );     
       $this->UfRepository->acao = $acao;
       $this->UfRepository->igualar_formulario( $data, $id );
       return view( 'uf.uf_form' )->with( 'data',     $data  )
@@ -58,7 +58,7 @@ class UfController extends MeuController {
    * Confirma a Inclusao, alteração e exclusão
    */
    public function Confirmar() {      
-
+ 
       
       switch ( Input::get('acao') ) {
          case 'incluir':

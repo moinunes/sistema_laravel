@@ -9,9 +9,10 @@
 * param    boolean      define se vai filtrar os dados         
 --------------------------------------------------------------------------------------------*/
 function buscar_fornecedor( _order = null ) {
+   //alert($("#filtro_codigo").val());
    criar_janela_modal();      
-   _filtro_codigo_fornecedor = $("#filtro_codigo_fornecedor").val();
-   _filtro_nome_fornecedor   = $("#filtro_nome_fornecedor").val(); 
+   _filtro_codigo = $("#filtro_codigo").val();
+   _filtro_nome   = $("#filtro_nome").val(); 
    ajax = $.ajax({
       type: "PUT",
       async: true,
@@ -20,14 +21,14 @@ function buscar_fornecedor( _order = null ) {
       data: { 
                acao:'buscar_fornecedor',
                order:_order,
-               filtro_codigo_fornecedor:_filtro_codigo_fornecedor,
-               filtro_nome_fornecedor:_filtro_nome_fornecedor,
+               filtro_codigo:_filtro_codigo,
+               filtro_nome:_filtro_nome,
             },
       beforeSend: function( xhr ) { $("#div_grid").html('aguarde. filtrando...'); },
       success: function(resultado){            
          $("#div_buscar").html( resultado );
-         $("#filtro_codigo_fornecedor").val( _filtro_codigo_fornecedor );
-         $("#filtro_nome_fornecedor").val( _filtro_nome_fornecedor );
+         $("#filtro_codigo").val( _filtro_codigo );
+         $("#filtro_nome").val( _filtro_nome );
       },
       failure: function( errMsg ) { alert(errMsg); } 
    });
@@ -38,10 +39,10 @@ function buscar_fornecedor( _order = null ) {
 --------------------------------------------------------------------------------------------*/
 $(".btn_fornecedor").click(function(event) {
    $("#id_fornecedor"    ).val( $(this).attr("data-id"       ) );
-   $("#codigo_fornecedor").val( $(this).attr("data-codigo"    ) );
-   $("#nome_fornecedor"  ).val( $(this).attr("data-descricao") );   
+   $("#fornecedor_codigo").val( $(this).attr("data-codigo"    ) );
+   $("#fornecedor_nome"  ).val( $(this).attr("data-descricao") );   
    //.. limpar filtros
-   $("#filtro_codigo_fornecedor").val('');
+   $("#filtro_codigo").val('');
    $("#filtro_nomeo_fornecedor").val(''); 
    //.. fecha janela
    $( "#div_buscar" ).dialog( "close" );

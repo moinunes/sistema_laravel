@@ -12,7 +12,11 @@
 
 .cor_vermelha {
    background-color:#EDF6F9;
-   color:red;
+   color:#CD4F39 !important;
+}
+
+.alerta {
+   color:#CD4F39 !important;
 }
 
 .ul {  
@@ -294,7 +298,8 @@ fieldset.fsStyle {
    margin-bottom: 10px;
 }
 
-input[type=text]{
+input[type=text],
+input[type=email]{
     border-radius:4px;
     -moz-border-radius:4px;
     -webkit-border-radius:4px;

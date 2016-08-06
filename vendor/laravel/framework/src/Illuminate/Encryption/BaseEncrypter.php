@@ -37,6 +37,7 @@ abstract class BaseEncrypter
     {
         $payload = json_decode(base64_decode($payload), true);
 
+
         // If the payload is not valid JSON or does not have the proper keys set we will
         // assume it is invalid and bail out of the routine since we will not be able
         // to decrypt the given value. We'll also check the MAC for this encryption.

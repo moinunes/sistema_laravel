@@ -5,7 +5,7 @@ class Produto extends Model_Auxiliar {
 
    protected $table      = 'tbproduto';
    protected $primaryKey = 'id_produto';
-   protected $fillable   = [ 'id_produto', 'codigo_produto', 'nome_produto', 'quantidade', 'preco', 'id_fornecedor' ];   
+   protected $fillable   = [ 'id_produto', 'codigo', 'descricao', 'quantidade', 'preco', 'id_fornecedor' ];   
 
    public function __construct() {
 

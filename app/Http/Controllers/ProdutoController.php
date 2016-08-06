@@ -38,10 +38,16 @@ class ProdutoController extends MeuController {
    */
    public function exibir_grid() {
       $this->ProdutoRepository->obter_filtro( $resultado );      
-      $data = Produto::whereRaw( $resultado->where )                     
-                      ->orderBy( $resultado->ordem )
-                      ->paginate( $this->registros_por_pagina );
-   
+      
+      $data = Produto::select( 'tbproduto.*',
+                               'tbfornecedor.codigo AS fornecedor_codigo',
+                               'tbfornecedor.nome AS fornecedor_nome' 
+                             )
+                       ->join( 'tbfornecedor', 'tbproduto.id_fornecedor', '=', 'tbfornecedor.id_fornecedor')
+                       ->whereRaw( $resultado->where )                     
+                       ->orderBy( $resultado->ordem )                      
+                       ->paginate( $this->registros_por_pagina );
+                       
       return view( 'produto.produto_grid' )->with( 'data', $data )
                                            ->with( 'filtros', $resultado->inputs );
    } // exibir_grid
@@ -79,7 +85,7 @@ class ProdutoController extends MeuController {
       }
 
       if ( !$this->ProdutoRepository->tudo_ok ) {
-          $data = (object)Input::all();          
+          $data = (object)Input::all();   
           return view( 'produto.produto_form' )->with( 'data',  $data )
                                                ->withErrors( $this->ProdutoRepository->validacao   );
       }

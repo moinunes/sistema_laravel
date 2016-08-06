@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Crypt;
 
 class User extends Authenticatable {
 
@@ -16,7 +17,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'master'
+        'nome', 'email','usuario', 'password', 'master'
     ];
     /**
      * The attributes excluded from the model's JSON form.
@@ -27,5 +28,8 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
+   public function obter_usuario( &$resultado, $nome_campo, $valor  ) {      
+      $resultado = User::where( $nome_campo, '=', $valor )->first();
+   }
     
 }

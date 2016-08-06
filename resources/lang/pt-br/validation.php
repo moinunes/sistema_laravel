@@ -108,15 +108,16 @@ return [
    |
    */ 
    'attributes' => [ 
-         'password_confirmar'  => 'Confirmar Senha',
-         'sigla_uf'            => 'Sigla',
-         "nome_uf"             => 'Nome',
-         'codigo_fornecedor'   => 'Código',
-         "nome_fornecedor"     => 'Nome',
-         'email'               => 'Email',
+         'nome'                => 'Nome',         
+         'descricao'                => 'Descrição', 
+         'codigo'                => 'Código', 
+         'senha'               => 'Senha',
          'password'            => 'Senha',
-         'codigo_produto'      => 'Código',
-         'nome_produto'        => 'Nome',
+         'password_confirmar'     => 'Confirmar Senha',
+         'usuario'             => 'Usuário',
+         'sigla_uf'            => 'Sigla',
+         "nome_uf"             => 'Nome',         
+         'email'               => 'Email',         
          'id_fornecedor'       => 'Fornecedor',
    ],
 

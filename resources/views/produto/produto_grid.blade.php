@@ -34,8 +34,8 @@ $titulo = 'Cadastro - Produtos';
             <td width="60%"></td>
          </tr> 
          <tr>
-           <td><input  type='text' name="filtro_codigo_produto" value="{{$filtros->filtro_codigo_produto}}" size="10" maxlength="10" ></td>
-           <td><input  type='text' name="filtro_nome_produto"   value="{{$filtros->filtro_nome_produto}}"   size="30" maxlength="30" ></td>
+           <td><input  type='text' name="filtro_codigo" value="{{$filtros->filtro_codigo}}" size="10" maxlength="10" ></td>
+           <td><input  type='text' name="filtro_descricao"   value="{{$filtros->filtro_descricao}}"   size="30" maxlength="30" ></td>
            <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>
          </tr>
       </table>
@@ -53,8 +53,12 @@ $titulo = 'Cadastro - Produtos';
             <?php Infra_Html::criar_link_com_permissao( 'incluir'  );?>
             <?php Infra_Html::criar_link_com_permissao( 'imprimir' );?>
          </td>               
-         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Sigla', 'codigo_produto' );?></td>
-         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Nome', 'nome_produto' );?></td>
+         <td width='10%'><?php Infra_Html::criar_titulo_grid( 'Código',     'codigo'        );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Descrição',  'descricao'     );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Quantidade', 'quantidade'    );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Preço',      'preco'         );?></td>
+         <td width='80%'><?php Infra_Html::criar_titulo_grid( 'Fornecedor', 'id_fornecedor' );?></td>
+
       </tr>
       @foreach ( $data as $item )
          <tr>
@@ -65,8 +69,11 @@ $titulo = 'Cadastro - Produtos';
                Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_produto );
                ?>
             </td>
-            <td>{{$item->codigo_produto}}</td>
-            <td>{{$item->nome_produto}}</td>
+            <td>{{$item->codigo}}</td>
+            <td>{{$item->descricao}}</td>
+            <td>{{$item->quantidade}}</td>
+            <td>{{$item->preco}}</td>
+            <td>{{$item->fornecedor_nome}}</td>
          </tr>
       @endforeach               
    </table>

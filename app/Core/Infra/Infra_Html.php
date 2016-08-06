@@ -181,25 +181,17 @@ class Infra_Html {
       ";      
       echo "$texto\n";
    } // exibir_string_campos_obrigatorioso
-
    
    /**
-   * Cria a tag form
+   * Retorna a classe para os campos obrigatórios
    *
-   * @param    string     título
-   * @param    string     classe
-   * @return   void
+   * @param    string     nome do campo text
+   * @return   string
    */
    public static function obrigatorio( $text ) {
       $erros = self::get_errors();
-      //$url = Request::url();
-         //class="{{$errors->has('sigla_uf') ? 'cor_vermelha' : 'cor_azul' }}
-      
-      if ( $erros->has('sigla_uf') ) {      
-         return "class=cor_vermelha";
-      }
-
-      //echo "<form name='$text' action='$url' method='$method' $valid  class='$classe'  >";
-   } // Form
+      $classe = $erros->has( $text ) ?  " cor_vermelha" : '';
+      return $classe;
+   } // obrigatorio
 
 } // Infra_Html

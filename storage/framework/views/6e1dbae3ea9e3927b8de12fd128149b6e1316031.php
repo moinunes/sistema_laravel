@@ -30,12 +30,14 @@ $titulo = 'Cadastro - Usuários';
       <table class="table-responsive" width="100%" border="0">            
          <tr>
             <td width="25%">Nome</td>
+            <td width="25%">Usuário</td>
             <td width="25%">Email</td>
             <td width="50%"></td>
          </tr> 
          <tr>
-           <td><input  type='text' name="filtro_name"  value="<?php echo e($filtros->filtro_name); ?>"  size="25" maxlength="25" ></td>
-           <td><input  type='text' name="filtro_email" value="<?php echo e($filtros->filtro_email); ?>" size="25" maxlength="25" ></td>                  
+           <td><input  type='text' name="filtro_nome"    value="<?php echo e($filtros->filtro_nome); ?>"    size="25" maxlength="25" ></td>
+           <td><input  type='text' name="filtro_usuario" value="<?php echo e($filtros->filtro_usuario); ?>" size="25" maxlength="25" ></td>
+           <td><input  type='text' name="filtro_email"   value="<?php echo e($filtros->filtro_email); ?>"   size="25" maxlength="25" ></td>                  
            <td><button type="submit" class="btn btn-success btn_filtrar">Filtrar</button></td>
          </tr>
       </table>
@@ -53,8 +55,9 @@ $titulo = 'Cadastro - Usuários';
             <?php Infra_Html::criar_link_com_permissao( 'incluir'  );?>
             <?php Infra_Html::criar_link_com_permissao( 'imprimir' );?>
          </td> 
-         <td width='30%'><?php Infra_Html::criar_titulo_grid( 'Nome', 'name' );?></td>
-         <td width='60%'><?php Infra_Html::criar_titulo_grid( 'Email', 'email' );?></td>                     
+         <td width='30%'><?php Infra_Html::criar_titulo_grid( 'Nome completo', 'nome' );?></td>
+         <td width='30%'><?php Infra_Html::criar_titulo_grid( 'Usuário',       'usuario' );?></td>
+         <td width='60%'><?php Infra_Html::criar_titulo_grid( 'Email',         'email' );?></td>                     
       </tr>
       <?php foreach( $data as $item ): ?>                   
          <tr>
@@ -65,7 +68,8 @@ $titulo = 'Cadastro - Usuários';
                Infra_Html::criar_link_com_permissao( 'excluir',   $item->id );
                ?>
             </td>              
-            <td><?php echo e($item->name); ?></td>
+            <td><?php echo e($item->nome); ?></td>
+            <td><?php echo e($item->usuario); ?></td>
             <td><?php echo e($item->email); ?></td>                
          </tr>
       <?php endforeach; ?>

@@ -6,10 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema Laravel</title>
 
-       <link href="/css/estilos.css"             rel="stylesheet">
+    <link href="/css/estilos.css"             rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="bootstrap/css/bootstrap.css"     rel="stylesheet">
+    <!-- jquery -->
+   <script type="text/javascript" src="/jquery/jquery.js"></script>
+   <script type="text/javascript" src="/jquery-ui/jquery-ui.js"></script>
+   <link href="/jquery-ui/jquery-ui.css" rel="stylesheet">
+   
+   <!-- bootstrap -->
+   <script type="text/javascript" src="/bootstrap/js/bootstrap.min.js"></script>  
+   <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
+   <link href="/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+   
   
 </head>
 <body>
@@ -28,11 +36,13 @@
       </div>
    </nav>
 
-    <?php echo $__env->yieldContent('content'); ?>
-
-    <!-- JavaScripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <?php /* <script src="<?php echo e(elixir('js/app.js')); ?>"></script> */ ?>
+  <div class="container-fluid">
+       <div class="row row-centered"> 
+         <div class="col-md-4 col-md-offset-4">
+           <?php echo $__env->yieldContent('content'); ?>
+         </div>
+      </div>
+   </div>
+   
 </body>
 </html>

@@ -5,7 +5,7 @@ class Fornecedor extends Model_Auxiliar {
 
    protected $table      = 'tbfornecedor';
    protected $primaryKey = 'id_fornecedor';   
-   protected $fillable   = [ 'id_fornecedor','codigo_fornecedor','nome_fornecedor' ];
+   protected $fillable   = [ 'id_fornecedor','codigo','nome' ];
    
    public function __construct() {      
    }
