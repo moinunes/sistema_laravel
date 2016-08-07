@@ -70,9 +70,7 @@ Infra_Html::set_errors( $errors );
          </tr>         
          <tr>
             <td><input  type='text' id="codigo" name="codigo" value="{{$data->codigo}}" size="8"  maxlength="10" {{$data->readonly}}></td>
-            <td><input  type='text' id="descricao"   name="descricao"   value="{{$data->descricao}}" size="60"  maxlength="60" {{$data->readonly}}></td>            
-
-           
+            <td><input  type='text' id="descricao"   name="descricao"   value="{{$data->descricao}}" size="60"  maxlength="60" {{$data->readonly}}></td>           
          </tr>
 
          <tr class='padrao'>

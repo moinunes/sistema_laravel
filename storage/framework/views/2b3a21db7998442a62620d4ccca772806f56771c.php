@@ -70,9 +70,7 @@ Infra_Html::set_errors( $errors );
          </tr>         
          <tr>
             <td><input  type='text' id="codigo" name="codigo" value="<?php echo e($data->codigo); ?>" size="8"  maxlength="10" <?php echo e($data->readonly); ?>></td>
-            <td><input  type='text' id="descricao"   name="descricao"   value="<?php echo e($data->descricao); ?>" size="60"  maxlength="60" <?php echo e($data->readonly); ?>></td>            
-
-           
+            <td><input  type='text' id="descricao"   name="descricao"   value="<?php echo e($data->descricao); ?>" size="60"  maxlength="60" <?php echo e($data->readonly); ?>></td>           
          </tr>
 
          <tr class='padrao'>
