@@ -86,6 +86,17 @@
    border:0px solid #EbF2F2; 
 }
 
+ 
+.div_rodape {
+   position:fixed;
+   top:0px;
+   left:0px;
+   width:150px;
+   height:200px:
+   border:1px solid black;
+   background:#CCC;
+}
+
 .linha {
    margin:
    border-width: 1; 
@@ -270,6 +281,24 @@
    font-size: 16px; 
    background:#d0e9c6;
 }
+
+
+.btn_menu { 
+   margin: 1px;
+   padding:1px;
+   width: 85px;
+   height: 20px; 
+   border:none;  
+   color:#ffffff; 
+   font-size: 12px; 
+   background:#d0e9c6;
+   border:1px solid #EbF2F2; 
+}
+.btn_menu:hover {
+   background:#02B449;   
+   color:#ffffff;  
+}
+
 
 .negrito {
  font-weight: bold;

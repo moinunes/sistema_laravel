@@ -7,8 +7,8 @@ use Crypt;
 
 class User extends Authenticatable {
 
-   protected $table     = 'users';
-   protected $primaryKey = 'id';
+   protected $table      = 'tbusuario';
+   protected $primaryKey = 'id_usuario';
   
 
     /**

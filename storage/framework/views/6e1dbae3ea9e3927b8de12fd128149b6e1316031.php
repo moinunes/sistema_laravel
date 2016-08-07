@@ -63,9 +63,9 @@ $titulo = 'Cadastro - Usuários';
          <tr>
             <td>
                <?php
-               Infra_Html::criar_link_com_permissao( 'consultar', $item->id );
-               Infra_Html::criar_link_com_permissao( 'alterar',   $item->id );
-               Infra_Html::criar_link_com_permissao( 'excluir',   $item->id );
+               Infra_Html::criar_link_com_permissao( 'consultar', $item->id_usuario );
+               Infra_Html::criar_link_com_permissao( 'alterar',   $item->id_usuario );
+               Infra_Html::criar_link_com_permissao( 'excluir',   $item->id_usuario );
                ?>
             </td>              
             <td><?php echo e($item->nome); ?></td>

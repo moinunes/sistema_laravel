@@ -30,13 +30,20 @@ class UserRepository extends User {
    public function Incluir( $request ) {
       $this->_request = $request;      
       $this->_obter_regras( $regras );
+
       $this->validacao = Validator::make( $request , $regras );
+
       if ( $this->validacao->passes() ) {
+
          $user = new User();
+
          $this->igualar_objeto( $user ) ;
          $this->tudo_ok = true;
+
          return $user->save();
+
       }
+
    } // Incluir
 
    /** 
@@ -49,7 +56,7 @@ class UserRepository extends User {
       $this->_obter_regras( $regras );
       $this->validacao = Validator::make( $request , $regras );
       if ( $this->validacao->passes() ) {      
-         $user = User::findOrFail( $request['id'] );
+         $user = User::findOrFail( $request['id_usuario'] );
          $this->igualar_objeto( $user ) ;             
          $user->save();        
          $this->tudo_ok = true;
@@ -72,11 +79,10 @@ class UserRepository extends User {
       $resultado->readonly = ( $this->acao == 'consultar' || $this->acao == 'excluir' ) ? 'readonly' : '';
       $resultado->achou    = $achou;
      
-      $resultado->id              = $achou ? $user->id    : null;
-      $resultado->nome            = $achou ? $user->nome  : null;
-      $resultado->usuario         = $achou ? $user->usuario  : null;
-      $resultado->email           = $achou ? $user->email : null;
-//dd($this->acao);
+      $resultado->id_usuario = $achou ? $user->id_usuario : null;
+      $resultado->nome       = $achou ? $user->nome       : null;
+      $resultado->usuario    = $achou ? $user->usuario    : null;
+      $resultado->email      = $achou ? $user->email      : null;
       $resultado->password           = $this->acao == 'alterar' ? 'null' : '';
       $resultado->password_confirmar = $this->acao == 'alterar' ? 'null' : '';
 
@@ -90,10 +96,10 @@ class UserRepository extends User {
    *
    */
    public function igualar_objeto( &$user ) {
-      $user->id       = $this->_request['id'   ];  
-      $user->nome     = $this->_request['nome' ];
-      $user->usuario  = $this->_request['usuario' ];
-      $user->email    = $this->_request['email'];      
+      $user->id_usuario = $this->_request['id_usuario'];  
+      $user->nome       = $this->_request['nome'      ];
+      $user->usuario    = $this->_request['usuario'   ];
+      $user->email      = $this->_request['email'     ];      
       if ( ( $this->_request['acao'] == 'incluir' ) || 
            ( $this->_request['acao'] == 'alterar' && $this->_request['password'] != 'null' ) ) {
          $user->password = Crypt::encrypt($this->_request['password']);
@@ -183,13 +189,14 @@ class UserRepository extends User {
    } // imprimir
 
    private function _obter_regras( &$regras ) {
-      $id = Input::get('id');
-      $regras = [ 'nome'     => 'required|min:2|max:40|unique:users,nome,'.$id.',id',
-                  'email'    => 'required|min:2|max:40|unique:users,email,'.$id.',id',
-                  'usuario'  => 'required|min:2|max:30|unique:users,usuario,'.$id.',id',                  
+      $id_usuario = Input::get('id_usuario');
+      $regras = [ 'nome'     => 'required|min:2|max:40|unique:tbusuario,nome,'.$id_usuario.',id_usuario',
+                  'email'    => 'required|min:2|max:40|unique:tbusuario,email,'.$id_usuario.',id_usuario',
+                  'usuario'  => 'required|min:2|max:30|unique:tbusuario,usuario,'.$id_usuario.',id_usuario',                  
                   'password'           => 'required',                  
                   'password_confirmar' => 'required|same:password'   
                 ];
+              //  dd($regras);
    } // obter_regras
 
 }

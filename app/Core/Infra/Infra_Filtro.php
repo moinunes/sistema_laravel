@@ -88,7 +88,7 @@ class Infra_Filtro {
    protected function alterar_filtros() {
       $alterar    = true;
       $controller = Request::segment(1);
-      $id_user    = Auth::user()->id;
+      $id_user    = Auth::user()->id_usuario;
       $inputs     = new \stdClass(); 
       $str        = '';
       $page       = '';
@@ -159,7 +159,7 @@ class Infra_Filtro {
    * @return void
    */   
    function incluir_filtros() {
-      $id_user    = Auth::user()->id;
+      $id_user    = Auth::user()->id_usuario;
       $controller = Request::segment(1);
       $page       = '1';
       $ordem      = $this->ordem_default;
@@ -194,7 +194,7 @@ class Infra_Filtro {
    * @return void
    */   
    public static function manter_filtros( $valor ) {
-      $id_user    = Auth::user()->id;
+      $id_user    = Auth::user()->id_usuario;
       $controller = Request::segment(1);
       $sql        = " UPDATE tbfiltro SET manter_filtro = '{$valor}'
                       WHERE id_user = {$id_user} AND controller = '{$controller}' ";                     
@@ -208,11 +208,11 @@ class Infra_Filtro {
    */   
    public static function obter_filtros( &$filtros ) {  
       $filtros    = array();
-      $id_user    = Auth::user()->id;
+      $id_user    = Auth::user()->id_usuario;
       $controller = Request::segment(1);
       $filtros    = DB::select(' SELECT * FROM tbfiltro
                                  WHERE id_user = :id_user AND controller = :controller' , 
-                                     [ 'id_user' =>  Auth::user()->id, 'controller' => $controller  ] );
+                                     [ 'id_user' =>  Auth::user()->id_usuario, 'controller' => $controller  ] );
    } // obter_filtros
 
    public static function obter_array_filtros( &$array_filtros ) {

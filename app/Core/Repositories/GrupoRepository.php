@@ -198,10 +198,10 @@ class GrupoRepository extends Grupo {
    public function obter_usuarios_disponiveis( &$consulta, $id_grupo ) {
       $id_grupo = $id_grupo != '' ? $id_grupo : 0;
       $sql= " SELECT
-                   id,
+                   id_usuario,
                    nome  
-              FROM users     
-              WHERE users.id NOT IN ( SELECT
+              FROM tbusuario     
+              WHERE tbusuario.id_usuario NOT IN ( SELECT
                                           id_user
                                       FROM tbgrupo_user
                                       WHERE tbgrupo_user.id_grupo = {$id_grupo}
@@ -215,10 +215,10 @@ class GrupoRepository extends Grupo {
    public function obter_usuarios_selecionados( &$consulta, $id_grupo ) {
       $id_grupo = $id_grupo != '' ? $id_grupo : 0; 
       $sql = " SELECT
-                       users.id,
-                       users.nome
-                  FROM users
-                  JOIN  tbgrupo_user ON ( tbgrupo_user.id_user = users.id )
+                       tbusuario.id_usuario,
+                       tbusuario.nome
+                  FROM tbusuario
+                  JOIN  tbgrupo_user ON ( tbgrupo_user.id_user = tbusuario.id_usuario )
                   WHERE tbgrupo_user.id_grupo = $id_grupo
               ";
       $consulta = DB::select( $sql );
@@ -232,10 +232,10 @@ class GrupoRepository extends Grupo {
       if ( $usuarios != '' ) {
          $ids = substr( $usuarios, 0, strlen($usuarios)-1 );
          $sql = " SELECT
-                       id,
+                       id_usuario,
                        name
-                  FROM users
-                  WHERE users.id  IN ( {$ids} )
+                  FROM tbusuario
+                  WHERE tbusuario.id_usuario  IN ( {$ids} )
                 ";
          $consulta = DB::select( $sql );      
       }

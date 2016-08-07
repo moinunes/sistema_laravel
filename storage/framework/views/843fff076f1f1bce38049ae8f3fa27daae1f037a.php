@@ -26,10 +26,10 @@ Infra_Html::set_errors( $errors );
       <?=Infra_Html::exibir_string_campos_obrigatorios() ?>
 
       <!-- input hidden -->
-      <?= Infra_Html::input_hidden( '_token',   csrf_token()    ); ?>
-      <?= Infra_Html::input_hidden( 'acao',     $data->acao     ); ?>
-      <?= Infra_Html::input_hidden( 'readonly', $data->readonly ); ?>
-      <?= Infra_Html::input_hidden( 'id',       $data->id       ); ?>
+      <?= Infra_Html::input_hidden( '_token',     csrf_token()      ); ?>
+      <?= Infra_Html::input_hidden( 'acao',       $data->acao       ); ?>
+      <?= Infra_Html::input_hidden( 'readonly',   $data->readonly   ); ?>
+      <?= Infra_Html::input_hidden( 'id_usuario', $data->id_usuario ); ?>
 
       <!--  desenhar interface -->
       <!-- -->      

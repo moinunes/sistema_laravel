@@ -60,47 +60,74 @@ use App\Core\Infra\Infra_Menu;
                </table>
             </div>
          @else
-            <div class="row" >               
-               
-               <table class="table-responsive cor_verde" border="0" width="100%">
-                  <tr>
+            <div class="row">            
+               <table class="table-responsive" border="0" width="100%">
+                  <tr class="cor_verde">
                      <td width="10%"></td>
                      <td width="10%"><div class="div_logo"><a target="blank" href="http://laravel.com"><img src="/img/logo.png"></a></div></td>
-                     <td width="30%"><div class="title"><?=$nome_sistema?></div></td>
-                     <td width="25%"><div class="text-muted"><?= 'usuário: '.Auth::user()->nome?></div></td>
-                     <td width="25%"><div class="text-info"><?=date("d/m/Y")?></div></td>
+                     <td width="20%"><div class="title"><?=$nome_sistema?></div></td>
+                     <td width="10%"><div class="text-muted"><?= Auth::user()->usuario;?></div></td>
+                     <td width="50%">
+                        <button type="button" class="btn btn_menu" onclick="window.location.href='/produto'">PRODUTOS</button>
+                        <button type="button" class="btn btn_menu" onclick="window.location.href='/produto'">CLIENTES</button>
+                        <button type="button" class="btn btn_menu" onclick="window.location.href='/produto'">PEDIDOS</button>
+                        <button type="button" class="btn btn_menu" onclick="window.location.href='/produto'">NFE</button>
+                        <button type="button" class="btn btn_menu" onclick="window.location.href='/produto'">NFS</button>
+                     </td>
                   </tr>
-                  <tr>
+                  <tr class="cor_verde">
                      <td colspan="5"><hr class="hr1"></td>
-                  </tr>                  
-                  <tr>
+                  </tr>
+                  <tr class="cor_verde">
                      <td colspan="5">
-            <div class="row">               
-               <div class="col-md-10 col-md-offset-1">
-                  <?php
-                     $menu = new Infra_Menu();
-                     $menu->montar_menu();
-                  ?>
-               </div>
-            </div>
-            </td>
-            </tr>
-            <tr>
+                        <div class="col-md-10 col-md-offset-1">
+                           <?php
+                           $menu = new Infra_Menu();
+                           $menu->montar_menu();
+                           ?>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
                      <td colspan="5"><hr class="hr1"></td>
                   </tr>
-            </table>                 
-         </div>
+                  <tr>
+                     <td height="5"></td>
+                  </tr>
+
+                  <tr >
+                     <td colspan="5" height="550"  VALIGN="top" ALIGN="CENTER">
+                        <table width="100%">
+                           <tr>
+                              <td colspan="3"></td>
+                           </tr>
+                           <tr >
+                              <td width="10%"></td>
+                              <td width="80%">@yield('content')</td>
+                              <td width="10%"></td>
+                           </tr>
+                        </table>
+                     </td>
+                  </tr>
+
+               </table>
+            </div>
          @endif                     
+   
       </div>  
    </nav>
-
-    <div class="container-fluid">
-      <div class="row">  
-         <div class="col-md-10 col-md-offset-1">
-	        @yield('content')
-         </div>
-      </div>
+         
+   <div class="div_rodape" >            
+      <table  border="0" width="100%">
+         <tr>
+            <td width="10%"></td>
+            <td width="20%"><div class="text-muted"><?= 'usuário: '.Auth::user()->nome?></div></td>
+            <td width="70%"><div class="text-info"><?=date("d/m/Y")?></div></td>
+         </tr>
+         
+      </table>
    </div>
-   
+
+
 </body>
 </html>

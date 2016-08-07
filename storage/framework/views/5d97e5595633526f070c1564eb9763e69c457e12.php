@@ -37,8 +37,8 @@ Infra_Html::set_errors( $errors );
       <!-- -->      
       <table border="0" width="100%">      
          <tr class='obrigatorio'>
-            <td width="15%" <?php echo e(Infra_Html::obrigatorio('sigla_uf')); ?>>Sigla*</td>
-            <td width="85%">Nome*</td>
+            <td width="15%" class="<?php echo e(Infra_Html::obrigatorio('sigla_uf')); ?>" >Sigla*</td>
+            <td width="85%" class="<?php echo e(Infra_Html::obrigatorio('nome_uf')); ?>"  >Nome*</td>
          </tr>
          <tr>
             <td><?= Infra_Html::input_text( 'sigla_uf', $data->sigla_uf, 3,  2,  $data->readonly ); ?></td>                                

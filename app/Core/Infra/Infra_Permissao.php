@@ -61,13 +61,13 @@ class Infra_Permissao {
    * @return   array        grupos  
    */   
    protected static function obter_grupos_do_usuario_logado( &$resultado ) {     
-      $user = Auth::user();            
+      $user = Auth::user();          
       $resultado = false;
       $resultado = DB::select( " SELECT 
                                     id_grupo,
                                     id_user
                                  FROM tbgrupo_user                                    
-                                 WHERE id_user = :id_user", [ 'id_user' => $user->id ] );   
+                                 WHERE id_user = :id_user", [ 'id_user' => $user->id_usuario ] );   
       return $resultado;
    } // obter_grupos_do_usuario_logado
 
